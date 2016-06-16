@@ -1,0 +1,2 @@
+INCLUDEPATH += $$PWD/invModel
+SRC_DIR = $$PWD

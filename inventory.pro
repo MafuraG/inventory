@@ -1,6 +1,10 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
+    invModel \
     invApp \
-    invModel
+    invController
+	
+OTHER_FILES += \
+    defaults.pri
 

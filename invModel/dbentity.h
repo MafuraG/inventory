@@ -1,6 +1,7 @@
 #ifndef DBENTITY_H
 #define DBENTITY_H
 
+#include <QHash>
 #include <QString>
 
 
@@ -18,9 +19,13 @@ public:
     unsigned int id() const;
     void setId(unsigned int id);
 
+    QHash<QString, QString> dbValues() const;
+    void setDbValues(const QHash<QString, QString> &dbValues);
+
 private:
     QString m_name;
     unsigned int m_id;
+    QHash<QString,QString> m_dbValues;
 };
 
 #endif // DBENTITY_H

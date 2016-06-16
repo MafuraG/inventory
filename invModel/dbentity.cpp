@@ -27,3 +27,13 @@ void dbEntity::setId(unsigned int id)
 {
     m_id = id;
 }
+
+QHash<QString, QString> dbEntity::dbValues() const
+{
+    return m_dbValues;
+}
+
+void dbEntity::setDbValues(const QHash<QString, QString> &dbValues)
+{
+    m_dbValues = dbValues;
+}
