@@ -19,8 +19,7 @@ public:
     unsigned int id() const;
     void setId(unsigned int id);
 
-    QHash<QString, QString> dbValues() const;
-    void setDbValues(const QHash<QString, QString> &dbValues);
+    virtual QHash<QString, QString> dbValues() = 0;
 
 private:
     QString m_name;
