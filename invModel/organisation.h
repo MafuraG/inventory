@@ -10,6 +10,7 @@ class Organisation: public dbEntity
 public:
     static QString ADDRESS;
     static QString TELEPHONE;
+    static QString ENTITYNAME;
 
     Organisation();
     QString address() const;

@@ -8,6 +8,7 @@
 class manufacturer:public dbEntity
 {
 public:
+    static QString ENTITYNAME;
     manufacturer();
 
     // dbEntity interface

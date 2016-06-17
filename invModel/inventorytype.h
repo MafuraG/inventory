@@ -8,6 +8,7 @@
 class InventoryType : public dbEntity
 {
 public:
+    static QString ENTITYNAME;
     InventoryType();
 
     // dbEntity interface

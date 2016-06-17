@@ -9,7 +9,7 @@ class Journal: public dbEntity
 {
 public:
     Journal();
-
+    static QString ENTITYNAME;
     static QString INVENTORYID;
     static QString DATE;
     static QString STATUSID;

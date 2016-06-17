@@ -5,12 +5,13 @@
 
 
 
-class InventoryModel: public dbEntity
+class InventoryDetail: public dbEntity
 {
 
 public:
     static QString MAN_ID;
-    InventoryModel();
+    static QString ENTITYNAME;
+    InventoryDetail();
     unsigned int manId() const;
     void setManId(unsigned int manId);
 

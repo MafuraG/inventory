@@ -1,21 +1,21 @@
-#include "inventoryModel.h"
+#include "inventoryDetail.h"
 
-InventoryModel::InventoryModel()
+InventoryDetail::InventoryDetail()
 {
 
 }
 
-unsigned int InventoryModel::manId() const
+unsigned int InventoryDetail::manId() const
 {
     return m_manId;
 }
 
-void InventoryModel::setManId(unsigned int manId)
+void InventoryDetail::setManId(unsigned int manId)
 {
     m_manId = manId;
 }
 
-QHash<QString, QString> InventoryModel::dbValues()
+QHash<QString, QString> InventoryDetail::dbValues()
 {
     QHash<QString,QString> keyVals;
     keyVals[MAN_ID] = QString("%0").arg(manId());
@@ -24,4 +24,5 @@ QHash<QString, QString> InventoryModel::dbValues()
     return keyVals;
 }
 
-QString InventoryModel::MAN_ID = "man_id";
+QString InventoryDetail::MAN_ID = "man_id";
+QString InventoryDetail::ENTITYNAME = "invent_detail";

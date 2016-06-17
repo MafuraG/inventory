@@ -12,3 +12,4 @@ QHash<QString, QString> InventoryType::dbValues()
     keyVals[ID] = QString("%0").arg(id());
     return keyVals;
 }
+QString InventoryType::ENTITYNAME = "invent_type";

@@ -8,6 +8,7 @@
 class InventoryStatus : public dbEntity
 {
 public:
+    static QString ENTITYNAME;
     InventoryStatus();
 
     // dbEntity interface

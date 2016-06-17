@@ -12,3 +12,5 @@ QHash<QString, QString> manufacturer::dbValues()
     keyVals[ID] = QString("%0").arg(id());
     return keyVals;
 }
+
+QString manufacturer::ENTITYNAME = "manufacturer";

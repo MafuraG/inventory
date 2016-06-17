@@ -1,6 +1,7 @@
 #include "organisation.h"
 QString Organisation::ADDRESS = "address_";
 QString Organisation::TELEPHONE = "telephone_";
+QString Organisation::ENTITYNAME = "organisation";
 
 Organisation::Organisation()
 {

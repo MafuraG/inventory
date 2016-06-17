@@ -28,7 +28,7 @@ HEADERS += \
     manufacturer.h \
     inventorytype.h \
     inventorystatus.h \
-    inventoryModel.h
+    inventoryDetail.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

@@ -13,6 +13,7 @@ public:
     static QString SERIAL;
     static QString OWNERID;
     static QString INVENTORYTYPEID;
+    static QString ENTITYNAME;
     Inventory();
     unsigned int modelId() const;
     void setModelId(unsigned int modelId);

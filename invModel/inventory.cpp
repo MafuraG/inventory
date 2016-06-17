@@ -73,3 +73,5 @@ QString Inventory::MODELID = "model_id";
 QString Inventory::NUMBER = "number";
 QString Inventory::OWNERID = "owner_id";
 QString Inventory::SERIAL = "serial_number";
+QString Inventory::ENTITYNAME = "inventory";
+

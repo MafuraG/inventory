@@ -60,3 +60,4 @@ QString Journal::COMMENT = "comment";
 QString Journal::DATE = "date_";
 QString Journal::INVENTORYID = "inventory_id";
 QString Journal::STATUSID = "status_id";
+QString Journal::ENTITYNAME = "journal";
