@@ -1,28 +1,38 @@
 #include "organisation.h"
-QString organisation::ADDRESS = "address_";
-QString organisation::TELEPHONE = "telephone_";
+QString Organisation::ADDRESS = "address_";
+QString Organisation::TELEPHONE = "telephone_";
 
-organisation::organisation()
+Organisation::Organisation()
 {
 
 }
 
-QString organisation::address() const
+QString Organisation::address() const
 {
     return m_address;
 }
 
-void organisation::setAddress(const QString &address)
+void Organisation::setAddress(const QString &address)
 {
     m_address = address;
 }
 
-QString organisation::telephone() const
+QString Organisation::telephone() const
 {
     return m_telephone;
 }
 
-void organisation::setTelephone(const QString &telephone)
+void Organisation::setTelephone(const QString &telephone)
 {
     m_telephone = telephone;
+}
+
+QHash<QString, QString> Organisation::dbValues()
+{
+    QHash<QString,QString> keyVals;
+    keyVals[ADDRESS] = QString("%0").arg(address());
+    keyVals[TELEPHONE] = QString("%0").arg(telephone());
+    keyVals[Name] = QString("%0").arg(name());
+    keyVals[ID] = QString("%0").arg(id());
+    return keyVals;
 }

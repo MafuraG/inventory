@@ -35,6 +35,10 @@ private:
     QString m_serial;
     unsigned int m_ownerId;
     unsigned int m_inventoryTypeId;
+
+    // dbEntity interface
+public:
+    QHash<QString, QString> dbValues();
 };
 
 #endif // INVENTORY_H

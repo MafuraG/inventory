@@ -5,13 +5,13 @@
 
 
 
-class organisation: public dbEntity
+class Organisation: public dbEntity
 {
 public:
     static QString ADDRESS;
     static QString TELEPHONE;
 
-    organisation();
+    Organisation();
     QString address() const;
     void setAddress(const QString &address);
 
@@ -21,6 +21,10 @@ public:
 private:
     QString m_address;
     QString m_telephone;
+
+    // dbEntity interface
+public:
+    QHash<QString, QString> dbValues();
 };
 
 #endif // ORGANISATION_H

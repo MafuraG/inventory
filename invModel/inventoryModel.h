@@ -16,6 +16,10 @@ public:
 
 private:
     unsigned int m_manId;
+
+    // dbEntity interface
+public:
+    QHash<QString, QString> dbValues();
 };
 
 #endif // CARTMODEL_H

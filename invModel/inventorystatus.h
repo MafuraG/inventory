@@ -9,6 +9,10 @@ class InventoryStatus : public dbEntity
 {
 public:
     InventoryStatus();
+
+    // dbEntity interface
+public:
+    QHash<QString, QString> dbValues();
 };
 
 #endif // INVENTORYSTATUS_H

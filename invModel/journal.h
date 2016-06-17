@@ -32,6 +32,10 @@ private:
     QString m_date;
     unsigned int m_statusID;
     QString m_comment;
+
+    // dbEntity interface
+public:
+    QHash<QString, QString> dbValues();
 };
 
 #endif // JOURNAL_H

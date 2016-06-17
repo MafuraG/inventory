@@ -45,6 +45,17 @@ void Journal::setComment(const QString &comment)
     m_comment = comment;
 }
 
+QHash<QString, QString> Journal::dbValues()
+{
+    QHash<QString,QString> keyVals;
+    keyVals[INVENTORYID] = QString("%0").arg(inventoryID());
+    keyVals[DATE] = QString("%0").arg(date());
+    keyVals[STATUSID] = QString("%0").arg(statusID());
+    keyVals[Name] = QString("%0").arg(name());
+    keyVals[ID] = QString("%0").arg(id());
+    return keyVals;
+}
+
 QString Journal::COMMENT = "comment";
 QString Journal::DATE = "date_";
 QString Journal::INVENTORYID = "inventory_id";
