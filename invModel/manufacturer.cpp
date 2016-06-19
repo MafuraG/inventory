@@ -1,11 +1,11 @@
 #include "manufacturer.h"
 
-manufacturer::manufacturer()
+Manufacturer::Manufacturer()
 {
 
 }
 
-QHash<QString, QString> manufacturer::dbValues()
+QHash<QString, QString> Manufacturer::dbValues()
 {
     QHash<QString,QString> keyVals;
     keyVals[Name] = QString("%0").arg(name());
@@ -13,4 +13,4 @@ QHash<QString, QString> manufacturer::dbValues()
     return keyVals;
 }
 
-QString manufacturer::ENTITYNAME = "manufacturer";
+QString Manufacturer::ENTITYNAME = "manufacturer";

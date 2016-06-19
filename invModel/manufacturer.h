@@ -5,11 +5,11 @@
 
 
 
-class manufacturer:public dbEntity
+class Manufacturer:public dbEntity
 {
 public:
     static QString ENTITYNAME;
-    manufacturer();
+    Manufacturer();
 
     // dbEntity interface
 public:
