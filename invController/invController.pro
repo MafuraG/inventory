@@ -11,9 +11,13 @@ TARGET = invController
 TEMPLATE = lib
 CONFIG += staticlib
 
-SOURCES += invcontroller.cpp
+SOURCES += invcontroller.cpp \
+    datacontext.cpp \
+    sqldatacontext.cpp
 
-HEADERS += invcontroller.h
+HEADERS += invcontroller.h \
+    datacontext.h \
+    sqldatacontext.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

@@ -6,7 +6,7 @@
 
 
 
-class dbEntity
+class DbEntity
 {
 public:
     dbEntity();
