@@ -53,6 +53,7 @@ QHash<QString, QString> Journal::dbValues()
     keyVals[STATUSID] = QString("%0").arg(statusID());
     keyVals[Name] = QString("%0").arg(name());
     keyVals[ID] = QString("%0").arg(id());
+    keyVals[COMMENT] = QString("%0").arg(comment());
     return keyVals;
 }
 

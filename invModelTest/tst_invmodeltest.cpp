@@ -1,6 +1,7 @@
 #include <QString>
 #include <QtTest>
 #include <inventory.h>
+#include <journal.h>
 #include <manufacturer.h>
 #include <organisation.h>
 
@@ -20,6 +21,9 @@ private Q_SLOTS:
 
     void inventoryTest();
     void invdbvaluesTest();
+
+    void journalTest();
+    void journaldbvaluesTest();
 };
 
 InvModelTest::InvModelTest()
@@ -130,7 +134,90 @@ void InvModelTest::inventoryTest()
 
 void InvModelTest::invdbvaluesTest()
 {
+    Inventory actual;
+    QHash<QString,QString> dbval_exp, dbval_actual;
+    actual.setId(1);
+    actual.setName("inv1");
+    actual.setInventoryTypeId(1);
+    actual.setModelId(1);
+    actual.setNumber("12345");
+    actual.setOwnerId(1);
+    actual.setSerial("12345");
 
+
+    dbval_actual = actual.dbValues();
+
+    dbval_exp[Inventory::Name] = QString("%0").arg("inv1");
+    dbval_exp[Inventory::ID] = QString("%0").arg(1);
+    dbval_exp[Inventory::INVENTORYTYPEID] = QString("%0").arg(1);
+    dbval_exp[Inventory::MODELID] = QString("%0").arg(1);
+    dbval_exp[Inventory::NUMBER] = QString("%0").arg("12345");
+    dbval_exp[Inventory::OWNERID] = QString("%0").arg(1);
+    dbval_exp[Inventory::SERIAL] = QString("%0").arg("12345");
+
+
+    QVERIFY2(dbval_exp[Inventory::Name] == dbval_actual[Inventory::Name], "Failure");
+    QVERIFY2(dbval_exp[Inventory::ID] == dbval_actual[Inventory::ID], "Failure");
+    QVERIFY2(dbval_exp[Inventory::INVENTORYTYPEID] == dbval_actual[Inventory::INVENTORYTYPEID], "Failure");
+    QVERIFY2(dbval_exp[Inventory::MODELID] == dbval_actual[Inventory::MODELID], "Failure");
+    QVERIFY2(dbval_exp[Inventory::NUMBER] == dbval_actual[Inventory::NUMBER], "Failure");
+    QVERIFY2(dbval_exp[Inventory::OWNERID] == dbval_actual[Inventory::OWNERID], "Failure");
+    QVERIFY2(dbval_exp[Inventory::SERIAL] == dbval_actual[Inventory::SERIAL], "Failure");
+}
+
+void InvModelTest::journalTest()
+{
+    Journal expected, actual;
+    expected.setId(1);
+    expected.setName("j1");
+    expected.setInventoryID(1);
+    expected.setComment("Comment");
+    expected.setDate("Date");
+    expected.setStatusID(1);
+
+    actual.setId(1);
+    actual.setName("j1");
+    actual.setInventoryID(1);
+    actual.setComment("Comment");
+    actual.setDate("Date");
+    actual.setStatusID(1);
+
+    QVERIFY2(expected.id() == actual.id(), "Failure");
+    QVERIFY2(expected.name() == actual.name(), "Failure");
+    QVERIFY2(expected.inventoryID() == actual.inventoryID(), "Failure");
+    QVERIFY2(expected.date() == actual.date(), "Failure");
+    QVERIFY2(expected.comment() == actual.comment(), "Failure");
+    QVERIFY2(expected.statusID() == actual.statusID(), "Failure");
+}
+
+void InvModelTest::journaldbvaluesTest()
+{
+    Journal actual;
+    QHash<QString,QString> dbval_exp, dbval_actual;
+
+    actual.setId(1);
+    actual.setName("j1");
+    actual.setInventoryID(1);
+    actual.setComment("Comment");
+    actual.setDate("Date");
+    actual.setStatusID(1);
+
+
+    dbval_actual = actual.dbValues();
+
+    dbval_exp[Journal::Name] = QString("%0").arg("j1");
+    dbval_exp[Journal::ID] = QString("%0").arg(1);
+    dbval_exp[Journal::INVENTORYID] = QString("%0").arg(1);
+    dbval_exp[Journal::COMMENT] = QString("%0").arg("Comment");
+    dbval_exp[Journal::DATE] = QString("%0").arg("Date");
+    dbval_exp[Journal::STATUSID] = QString("%0").arg(1);
+
+    QVERIFY2(dbval_exp[Journal::Name] == dbval_actual[Journal::Name], "Failure");
+    QVERIFY2(dbval_exp[Journal::ID] == dbval_actual[Journal::ID], "Failure");
+    QVERIFY2(dbval_exp[Journal::INVENTORYID] == dbval_actual[Journal::INVENTORYID], "Failure");
+    QVERIFY2(dbval_exp[Journal::COMMENT] == dbval_actual[Journal::COMMENT], "Failure");
+    QVERIFY2(dbval_exp[Journal::DATE] == dbval_actual[Journal::DATE], "Failure");
+    QVERIFY2(dbval_exp[Journal::STATUSID] == dbval_actual[Journal::STATUSID], "Failure");
 }
 
 QTEST_APPLESS_MAIN(InvModelTest)
