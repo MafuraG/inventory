@@ -1,12 +1,13 @@
 #include "dbentity.h"
 
-DbEntity::dbEntity()
-{
-
-}
 
 QString DbEntity::ID = "id_";
 QString DbEntity::Name= "name_";
+
+DbEntity::DbEntity()
+{
+
+}
 
 QString DbEntity::name() const
 {
@@ -31,6 +32,11 @@ void DbEntity::setId(unsigned int id)
 QHash<QString, QVariant> DbEntity::dbValues()
 {
     return dbValuesImplementation();
+}
+
+QString DbEntity::getEntityName()
+{
+    return getEntityNameImplementation();
 }
 
 

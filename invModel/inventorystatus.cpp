@@ -13,4 +13,9 @@ QHash<QString, QVariant> InventoryStatus::dbValuesImplementation()
     return keyVals;
 }
 
+QString InventoryStatus::getEntityNameImplementation()
+{
+    return InventoryStatus::ENTITYNAME;
+}
+
 QString InventoryStatus::ENTITYNAME = "invent_status";

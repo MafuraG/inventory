@@ -20,6 +20,10 @@ private:
 
 private:
     virtual QHash<QString, QVariant> dbValuesImplementation();
+
+    // DbEntity interface
+private:
+    virtual QString getEntityNameImplementation();
 };
 
 #endif // CARTMODEL_H

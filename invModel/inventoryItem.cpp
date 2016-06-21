@@ -24,5 +24,10 @@ QHash<QString, QVariant> InventoryItem::dbValuesImplementation()
     return keyVals;
 }
 
+QString InventoryItem::getEntityNameImplementation()
+{
+    return InventoryItem::ENTITYNAME;
+}
+
 QString InventoryItem::MAN_ID = "man_id";
 QString InventoryItem::ENTITYNAME = "invent_detail";

@@ -13,6 +13,10 @@ public:
 
 private:
     virtual QHash<QString, QVariant> dbValuesImplementation();
+
+    // DbEntity interface
+private:
+    virtual QString getEntityNameImplementation();
 };
 
 #endif // MANUFACTURER_H

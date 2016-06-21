@@ -13,4 +13,9 @@ QHash<QString, QVariant> Manufacturer::dbValuesImplementation()
     return keyVals;
 }
 
+QString Manufacturer::getEntityNameImplementation()
+{
+    return Manufacturer::ENTITYNAME;
+}
+
 QString Manufacturer::ENTITYNAME = "manufacturer";

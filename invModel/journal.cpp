@@ -57,6 +57,11 @@ QHash<QString, QVariant> Journal::dbValuesImplementation()
     return keyVals;
 }
 
+QString Journal::getEntityNameImplementation()
+{
+    return Journal::ENTITYNAME;
+}
+
 
 QString Journal::COMMENT = "comment";
 QString Journal::DATE = "date_";

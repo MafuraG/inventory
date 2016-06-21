@@ -1,10 +1,17 @@
 TEMPLATE = subdirs
 
+CONFIG+=ordered
+
 SUBDIRS += \
     invModel \
-    invApp \
     invController \
-    invModelTest
+    invApp \    
+    invModelTest \
+    invControllerTest
+
+invModelTest.depends = invModel
+invControllerTest.depends = invModel
+invControllerTest.depends = invController
 	
 OTHER_FILES += \
     defaults.pri

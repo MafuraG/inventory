@@ -68,6 +68,11 @@ QHash<QString, QVariant> Inventory::dbValuesImplementation()
     return keyVals;
 }
 
+QString Inventory::getEntityNameImplementation()
+{
+    return Inventory::ENTITYNAME;
+}
+
 QString Inventory::INVENTORYTYPEID = "inventory_type_id";
 QString Inventory::MODELID = "model_id";
 QString Inventory::NUMBER = "number";

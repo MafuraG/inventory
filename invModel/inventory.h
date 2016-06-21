@@ -40,6 +40,10 @@ private:
     // DbEntity interface
 private:
     virtual QHash<QString, QVariant> dbValuesImplementation();
+
+    // DbEntity interface
+private:
+    virtual QString getEntityNameImplementation();
 };
 
 #endif // INVENTORY_H

@@ -10,7 +10,7 @@
 class DbEntity
 {
 public:
-    dbEntity();
+    DbEntity();
 
     static QString ID;
     static QString Name;
@@ -21,13 +21,15 @@ public:
     void setId(unsigned int id);
 
     QHash<QString, QVariant> dbValues();
+    QString getEntityName();
 
 private:
     QString m_name;
     unsigned int m_id;
     QHash<QString,QVariant> m_dbValues;
 
-    virtual QHash<QString,QVariant> dbValuesImplementation()=0;
+    virtual QHash<QString,QVariant> dbValuesImplementation() = 0;
+    virtual QString getEntityNameImplementation() = 0;
 };
 
 #endif // DBENTITY_H

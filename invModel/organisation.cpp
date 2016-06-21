@@ -38,4 +38,9 @@ QHash<QString, QVariant> Organisation::dbValuesImplementation()
     return keyVals;
 }
 
+QString Organisation::getEntityNameImplementation()
+{
+    return Organisation::ENTITYNAME;
+}
+
 

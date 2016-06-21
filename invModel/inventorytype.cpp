@@ -12,4 +12,9 @@ QHash<QString, QVariant> InventoryType::dbValuesImplementation()
     keyVals[ID] =id();
     return keyVals;
 }
+
+QString InventoryType::getEntityNameImplementation()
+{
+    return InventoryType::ENTITYNAME;
+}
 QString InventoryType::ENTITYNAME = "invent_type";
