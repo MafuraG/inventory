@@ -5,7 +5,7 @@
 
 
 
-class Journal: public dbEntity
+class Journal: public DbEntity
 {
 public:
     Journal();
@@ -31,11 +31,11 @@ private:
     unsigned int m_inventoryID;
     QString m_date;
     unsigned int m_statusID;
-    QString m_comment;
+    QString m_comment;    
 
-    // dbEntity interface
-public:
-    QHash<QString, QString> dbValues();
+    // DbEntity interface
+private:
+    virtual QHash<QString, QVariant> dbValuesImplementation();
 };
 
 #endif // JOURNAL_H

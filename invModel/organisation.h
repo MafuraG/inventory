@@ -5,7 +5,7 @@
 
 
 
-class Organisation: public dbEntity
+class Organisation: public DbEntity
 {
 public:
     static QString ADDRESS;
@@ -23,9 +23,11 @@ private:
     QString m_address;
     QString m_telephone;
 
-    // dbEntity interface
-public:
-    QHash<QString, QString> dbValues();
+
+
+    // DbEntity interface
+private:
+    virtual QHash<QString, QVariant> dbValuesImplementation();
 };
 
 #endif // ORGANISATION_H

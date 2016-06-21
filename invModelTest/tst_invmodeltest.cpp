@@ -52,7 +52,7 @@ void InvModelTest::organisationTest()
 void InvModelTest::orgdbvaluesTest()
 {
     Organisation actual;
-    QHash<QString,QString> dbval_exp, dbval_actual;
+    QHash<QString,QVariant> dbval_exp, dbval_actual;
     actual.setId(1);
     actual.setName("org1");
     actual.setAddress("Xyz");
@@ -60,10 +60,10 @@ void InvModelTest::orgdbvaluesTest()
 
     dbval_actual = actual.dbValues();
 
-    dbval_exp[Organisation::ADDRESS] = QString("%0").arg("Xyz");
-    dbval_exp[Organisation::TELEPHONE] = QString("%0").arg("123456");
-    dbval_exp[Organisation::Name] = QString("%0").arg("org1");
-    dbval_exp[Organisation::ID] = QString("%0").arg(1);
+    dbval_exp[Organisation::ADDRESS] = "Xyz";
+    dbval_exp[Organisation::TELEPHONE] = "123456";
+    dbval_exp[Organisation::Name] = "org1";
+    dbval_exp[Organisation::ID] = 1;
 
     QVERIFY2( dbval_exp[Organisation::ADDRESS] == dbval_actual[Organisation::ADDRESS], "Failure");
     QVERIFY2(dbval_exp[Organisation::TELEPHONE] == dbval_actual[Organisation::TELEPHONE], "Failure");
@@ -88,15 +88,15 @@ void InvModelTest::manufactureTest()
 void InvModelTest::mandbvaluesTest()
 {
     Manufacturer actual;
-    QHash<QString,QString> dbval_exp, dbval_actual;
+    QHash<QString,QVariant> dbval_exp, dbval_actual;
     actual.setId(1);
     actual.setName("man1");
 
 
     dbval_actual = actual.dbValues();
 
-    dbval_exp[Manufacturer::Name] = QString("%0").arg("man1");
-    dbval_exp[Manufacturer::ID] = QString("%0").arg(1);
+    dbval_exp[Manufacturer::Name] = "man1";
+    dbval_exp[Manufacturer::ID] = 1;
 
 
     QVERIFY2(dbval_exp[Manufacturer::Name] == dbval_actual[Manufacturer::Name], "Failure");
@@ -135,7 +135,7 @@ void InvModelTest::inventoryTest()
 void InvModelTest::invdbvaluesTest()
 {
     Inventory actual;
-    QHash<QString,QString> dbval_exp, dbval_actual;
+    QHash<QString,QVariant> dbval_exp, dbval_actual;
     actual.setId(1);
     actual.setName("inv1");
     actual.setInventoryTypeId(1);
@@ -147,13 +147,13 @@ void InvModelTest::invdbvaluesTest()
 
     dbval_actual = actual.dbValues();
 
-    dbval_exp[Inventory::Name] = QString("%0").arg("inv1");
-    dbval_exp[Inventory::ID] = QString("%0").arg(1);
-    dbval_exp[Inventory::INVENTORYTYPEID] = QString("%0").arg(1);
-    dbval_exp[Inventory::MODELID] = QString("%0").arg(1);
-    dbval_exp[Inventory::NUMBER] = QString("%0").arg("12345");
-    dbval_exp[Inventory::OWNERID] = QString("%0").arg(1);
-    dbval_exp[Inventory::SERIAL] = QString("%0").arg("12345");
+    dbval_exp[Inventory::Name] = "inv1";
+    dbval_exp[Inventory::ID] = 1;
+    dbval_exp[Inventory::INVENTORYTYPEID] = 1;
+    dbval_exp[Inventory::MODELID] = 1;
+    dbval_exp[Inventory::NUMBER] = "12345";
+    dbval_exp[Inventory::OWNERID] = 1;
+    dbval_exp[Inventory::SERIAL] = "12345";
 
 
     QVERIFY2(dbval_exp[Inventory::Name] == dbval_actual[Inventory::Name], "Failure");
@@ -193,7 +193,7 @@ void InvModelTest::journalTest()
 void InvModelTest::journaldbvaluesTest()
 {
     Journal actual;
-    QHash<QString,QString> dbval_exp, dbval_actual;
+    QHash<QString,QVariant> dbval_exp, dbval_actual;
 
     actual.setId(1);
     actual.setName("j1");
@@ -205,12 +205,12 @@ void InvModelTest::journaldbvaluesTest()
 
     dbval_actual = actual.dbValues();
 
-    dbval_exp[Journal::Name] = QString("%0").arg("j1");
-    dbval_exp[Journal::ID] = QString("%0").arg(1);
-    dbval_exp[Journal::INVENTORYID] = QString("%0").arg(1);
-    dbval_exp[Journal::COMMENT] = QString("%0").arg("Comment");
-    dbval_exp[Journal::DATE] = QString("%0").arg("Date");
-    dbval_exp[Journal::STATUSID] = QString("%0").arg(1);
+    dbval_exp[Journal::Name] = "j1";
+    dbval_exp[Journal::ID] = 1;
+    dbval_exp[Journal::INVENTORYID] = 1;
+    dbval_exp[Journal::COMMENT] = "Comment";
+    dbval_exp[Journal::DATE] = "Date";
+    dbval_exp[Journal::STATUSID] = 1;
 
     QVERIFY2(dbval_exp[Journal::Name] == dbval_actual[Journal::Name], "Failure");
     QVERIFY2(dbval_exp[Journal::ID] == dbval_actual[Journal::ID], "Failure");

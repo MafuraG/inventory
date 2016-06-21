@@ -5,11 +5,11 @@ Manufacturer::Manufacturer()
 
 }
 
-QHash<QString, QString> Manufacturer::dbValues()
+QHash<QString, QVariant> Manufacturer::dbValuesImplementation()
 {
-    QHash<QString,QString> keyVals;
-    keyVals[Name] = QString("%0").arg(name());
-    keyVals[ID] = QString("%0").arg(id());
+    QHash <QString,QVariant> keyVals;
+    keyVals[Name] = name();
+    keyVals[ID] =id();
     return keyVals;
 }
 

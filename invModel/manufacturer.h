@@ -5,15 +5,14 @@
 
 
 
-class Manufacturer:public dbEntity
+class Manufacturer:public DbEntity
 {
 public:
     static QString ENTITYNAME;
     Manufacturer();
 
-    // dbEntity interface
-public:
-    QHash<QString, QString> dbValues();
+private:
+    virtual QHash<QString, QVariant> dbValuesImplementation();
 };
 
 #endif // MANUFACTURER_H

@@ -5,15 +5,14 @@
 
 
 
-class InventoryType : public dbEntity
+class InventoryType : public DbEntity
 {
 public:
     static QString ENTITYNAME;
     InventoryType();
 
-    // dbEntity interface
-public:
-    QHash<QString, QString> dbValues();
+private:
+    virtual QHash<QString, QVariant> dbValuesImplementation();
 };
 
 #endif // INVENTORYTYPE_H

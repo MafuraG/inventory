@@ -13,12 +13,12 @@ CONFIG += staticlib
 SOURCES += \
     dbentity.cpp \
     organisation.cpp \
-    cartmodel.cpp \
     inventory.cpp \
     journal.cpp \
     manufacturer.cpp \
     inventorytype.cpp \
-    inventorystatus.cpp
+    inventorystatus.cpp \
+    inventoryItem.cpp
 
 HEADERS += \
     dbentity.h \
@@ -28,7 +28,7 @@ HEADERS += \
     manufacturer.h \
     inventorytype.h \
     inventorystatus.h \
-    inventoryDetail.h
+    inventoryItem.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

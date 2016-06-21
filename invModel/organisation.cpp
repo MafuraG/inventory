@@ -28,12 +28,14 @@ void Organisation::setTelephone(const QString &telephone)
     m_telephone = telephone;
 }
 
-QHash<QString, QString> Organisation::dbValues()
+QHash<QString, QVariant> Organisation::dbValuesImplementation()
 {
-    QHash<QString,QString> keyVals;
-    keyVals[ADDRESS] = QString("%0").arg(address());
-    keyVals[TELEPHONE] = QString("%0").arg(telephone());
-    keyVals[Name] = QString("%0").arg(name());
-    keyVals[ID] = QString("%0").arg(id());
+    QHash<QString,QVariant> keyVals;
+    keyVals[ADDRESS] = address();
+    keyVals[TELEPHONE] = telephone();
+    keyVals[Name] = name();
+    keyVals[ID] = id();
     return keyVals;
 }
+
+

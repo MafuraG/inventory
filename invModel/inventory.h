@@ -5,7 +5,7 @@
 
 
 
-class Inventory : public dbEntity
+class Inventory : public DbEntity
 {
 public:
     static QString MODELID;
@@ -37,9 +37,9 @@ private:
     unsigned int m_ownerId;
     unsigned int m_inventoryTypeId;
 
-    // dbEntity interface
-public:
-    QHash<QString, QString> dbValues();
+    // DbEntity interface
+private:
+    virtual QHash<QString, QVariant> dbValuesImplementation();
 };
 
 #endif // INVENTORY_H

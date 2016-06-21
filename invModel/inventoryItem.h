@@ -1,26 +1,25 @@
-#ifndef CARTMODEL_H
-#define CARTMODEL_H
+#ifndef INVENTORYITEM_H
+#define INVENTORYITEM_H
 
 #include "dbentity.h"
 
 
 
-class InventoryDetail: public dbEntity
+class InventoryItem: public DbEntity
 {
 
 public:
     static QString MAN_ID;
     static QString ENTITYNAME;
-    InventoryDetail();
+    InventoryItem();
     unsigned int manId() const;
     void setManId(unsigned int manId);
 
 private:
     unsigned int m_manId;
 
-    // dbEntity interface
-public:
-    QHash<QString, QString> dbValues();
+private:
+    virtual QHash<QString, QVariant> dbValuesImplementation();
 };
 
 #endif // CARTMODEL_H

@@ -7,6 +7,8 @@ include(../defaults.pri)
 
 QT       -= gui
 
+QT      +=sql
+
 TARGET = invController
 TEMPLATE = lib
 CONFIG += staticlib

@@ -1,31 +1,36 @@
 #include "dbentity.h"
 
-dbEntity::dbEntity()
+DbEntity::dbEntity()
 {
 
 }
 
-QString dbEntity::ID = "id_";
-QString dbEntity::Name= "name_";
+QString DbEntity::ID = "id_";
+QString DbEntity::Name= "name_";
 
-QString dbEntity::name() const
+QString DbEntity::name() const
 {
     return m_name;
 }
 
-void dbEntity::setName(const QString &name)
+void DbEntity::setName(const QString &name)
 {
     m_name = name;
 }
 
-unsigned int dbEntity::id() const
+unsigned int DbEntity::id() const
 {
     return m_id;
 }
 
-void dbEntity::setId(unsigned int id)
+void DbEntity::setId(unsigned int id)
 {
     m_id = id;
+}
+
+QHash<QString, QVariant> DbEntity::dbValues()
+{
+    return dbValuesImplementation();
 }
 
 

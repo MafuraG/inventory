@@ -3,6 +3,7 @@
 
 #include <QHash>
 #include <QString>
+#include <QVariant>
 
 
 
@@ -19,12 +20,14 @@ public:
     unsigned int id() const;
     void setId(unsigned int id);
 
-    virtual QHash<QString, QString> dbValues() = 0;
+    QHash<QString, QVariant> dbValues();
 
 private:
     QString m_name;
     unsigned int m_id;
-    QHash<QString,QString> m_dbValues;
+    QHash<QString,QVariant> m_dbValues;
+
+    virtual QHash<QString,QVariant> dbValuesImplementation()=0;
 };
 
 #endif // DBENTITY_H

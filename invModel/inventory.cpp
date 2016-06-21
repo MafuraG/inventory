@@ -55,16 +55,16 @@ void Inventory::setInventoryTypeId(unsigned int inventoryType)
     m_inventoryTypeId = inventoryType;
 }
 
-QHash<QString, QString> Inventory::dbValues()
+QHash<QString, QVariant> Inventory::dbValuesImplementation()
 {
-    QHash<QString,QString> keyVals;
-    keyVals[INVENTORYTYPEID] = QString("%0").arg(inventoryTypeId());
-    keyVals[MODELID] = QString("%0").arg(modelId());
-    keyVals[NUMBER] = QString("%0").arg(number());
-    keyVals[OWNERID] = QString("%0").arg(ownerId());
-    keyVals[SERIAL] = QString("%0").arg(serial());
-    keyVals[Name] = QString("%0").arg(name());
-    keyVals[ID] = QString("%0").arg(id());
+    QHash <QString,QVariant> keyVals;
+    keyVals[INVENTORYTYPEID] = inventoryTypeId();
+    keyVals[MODELID] = modelId();
+    keyVals[NUMBER] = number();
+    keyVals[OWNERID] = ownerId();
+    keyVals[SERIAL] = serial();
+    keyVals[Name] = name();
+    keyVals[ID] =id();
     return keyVals;
 }
 
