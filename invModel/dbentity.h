@@ -11,6 +11,7 @@ class DbEntity
 {
 public:
     DbEntity();
+    virtual ~DbEntity();
 
     static QString ID;
     static QString Name;

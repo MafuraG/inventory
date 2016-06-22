@@ -15,6 +15,7 @@ public:
     static QString INVENTORYTYPEID;
     static QString ENTITYNAME;
     Inventory();
+    virtual ~Inventory();
     unsigned int modelId() const;
     void setModelId(unsigned int modelId);
 

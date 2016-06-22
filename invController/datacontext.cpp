@@ -20,9 +20,9 @@ void DataContext::UpdateEntity(DbEntity *entity)
     UpdateEntityImplementation(entity);
 }
 
-void DataContext::SelectEntities(QString filter, QList<DbEntity> &selectedEntities)
+void DataContext::SelectEntities(const QString entityname, const QStringList &filter, QList<DbEntity *> &selectedEntities)
 {
-    SelectEntitiesImplementation(filter,selectedEntities);
+    SelectEntitiesImplementation(entityname,filter,selectedEntities);
 }
 
 void DataContext::CreateDatabase()

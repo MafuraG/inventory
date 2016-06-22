@@ -15,11 +15,15 @@ CONFIG += staticlib
 
 SOURCES += invcontroller.cpp \
     datacontext.cpp \
-    sqldatacontext.cpp
+    sqldatacontext.cpp \
+    dataconverter.cpp \
+    sqlitedataconverter.cpp
 
 HEADERS += invcontroller.h \
     datacontext.h \
-    sqldatacontext.h
+    sqldatacontext.h \
+    dataconverter.h \
+    sqlitedataconverter.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

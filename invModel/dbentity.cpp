@@ -9,6 +9,11 @@ DbEntity::DbEntity()
 
 }
 
+DbEntity::~DbEntity()
+{
+
+}
+
 QString DbEntity::name() const
 {
     return m_name;

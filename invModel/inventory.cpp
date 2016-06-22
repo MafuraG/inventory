@@ -5,6 +5,11 @@ Inventory::Inventory()
 
 }
 
+Inventory::~Inventory()
+{
+
+}
+
 unsigned int Inventory::modelId() const
 {
     return m_modelId;
