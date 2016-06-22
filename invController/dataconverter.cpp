@@ -5,7 +5,12 @@ DataConverter::DataConverter()
 
 }
 
-QString DataConverter::toString(QVariant &val)
+QString DataConverter::toDbString(QVariant &val)
 {
-    return toStringImplementation(val);
+    return toDbStringImplementation(val);
+}
+
+QString DataConverter::toDbType(QVariant &val)
+{
+    return toDbTypeImplementation(val);
 }

@@ -9,9 +9,11 @@ class DataConverter
 {
 public:
     DataConverter();
-    QString toString(QVariant &val);
+    QString toDbString(QVariant &val);
+    QString toDbType(QVariant &val);
 private:
-    virtual QString toStringImplementation(QVariant &val) = 0;
+    virtual QString toDbStringImplementation(QVariant &val) = 0;
+    virtual QString toDbTypeImplementation(QVariant &val) = 0;
 };
 
 #endif // DATACONVERSION_H

@@ -110,12 +110,12 @@ void SQLDataContext::buildString(QStringList &result, const QList<QVariant> &fra
     {
         if (i == 0)
         {
-            result.append(c->toString(s));
+            result.append(c->toDbString(s));
             i++;
         }
         else
         {
-            result.append(QString("%0 %1 ").arg(separator,c->toString(s)));
+            result.append(QString("%0 %1 ").arg(separator,c->toDbString(s)));
         }
     }
 }
@@ -147,7 +147,7 @@ QStringList SQLDataContext::buildkeyValPairs(const QHash<QString,QVariant> &dbva
     {
         QString key = keys[i];
         QVariant val = values[i];
-        QString keyVal = QString("%0 %1 %2").arg(key,separator,c->toString(val));
+        QString keyVal = QString("%0 %1 %2").arg(key,separator,c->toDbString(val));
         result.append(keyVal);
     }
 
@@ -221,6 +221,62 @@ void SQLDataContext::buildUpdateQuery(QString &q, const QStringList &keyvalPairs
     }
 
     q = str;
+}
+
+void SQLDataContext::buildCreateQuery(QString &q, const DbEntity * entity)
+{
+    QStringList q_str;
+    //CREATE TABLE IF NOT EXISTS Testing(Id INTEGER,NAME TEXT)
+    QStringList createfields = buildCreateFields(entity);
+
+
+    q_str.append("CREATE TABLE IF NOT EXISTS ");
+    q_str.append(QString("%0 ").arg(entity->getEntityName()));
+
+    q_str.append(" ( ");
+    buildString(q_str,createfields,QString(","));
+    q_str.append(")");
+
+    QString str;
+
+    for(QString s: q_str)
+    {
+        str += s;
+    }
+
+    q = str;
+}
+
+QStringList SQLDataContext::buildCreateFields(const DbEntity *entity)
+{
+    QHash<QString,QVariant> dbvalues = entity->dbValues();
+
+    QList<QString> keys = dbvalues.keys();
+    QList<QVariant> values = dbvalues.values();
+    DataConverter *c = new SqliteDataConverter();
+    QStringList result;
+    /**CREATE TABLE COMPANY(
+       ID INT PRIMARY KEY     NOT NULL,
+       NAME           TEXT    NOT NULL,
+       AGE            INT     NOT NULL,
+       ADDRESS        CHAR(50),
+       SALARY         REAL
+    );
+    */
+    for(int i = 0 ; i < keys.count(); i++)
+    {
+        QString key = keys[i];
+        QVariant val = values[i];
+        QString keyVal;
+
+        if (key == DbEntity::ID)
+            keyVal = QString("%0 INT PRIMARY KEY NOT NULL").arg(key);
+        else
+            keyVal = QString("%0 %2").arg(key).arg(c->toDbType(val));
+
+        result.append(keyVal);
+    }
+    return result;
 }
 
 QString SQLDataContext::sqlStr() const

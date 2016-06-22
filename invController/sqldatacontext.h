@@ -33,12 +33,13 @@ private:
     void buildFilter(QString &q,  const QString &oper, const QStringList &params);
     void buildInsertQuery(QString &q, const QStringList &columns, const QString &table, const QList<QVariant> &values);
     void buildUpdateQuery(QString &q, const QStringList &keyvalPairs, const QString &table, const QStringList &filter);
+    void buildCreateQuery(QString &q, const DbEntity *entity);
     QStringList buildkeyValPairs(const QHash<QString, QVariant> &dbvalues, const QString &separator);
+    QStringList buildCreateFields(const DbEntity *entity);
 
     QSqlDatabase db;
     QSqlQuery query;
     QString m_sqlStr;
-
 };
 
 #endif // SQLDATACONTEXT_H

@@ -81,7 +81,7 @@ void InvControllerTests::sqlDataConverterTest()
 
     QVariant param = "Hello World!";
     expected = QString("'%0'").arg(param.toString());
-    actual = c->toString(param);
+    actual = c->toDbString(param);
 
     QVERIFY2(expected == actual, "FAIL");
 }
