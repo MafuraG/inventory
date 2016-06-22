@@ -16,6 +16,7 @@ private Q_SLOTS:
     void SQLCreateEntityTest();
     void SQLUpdateEntityTest();
     void SQLSelectEntitiesTest();
+    void SQLCreateDBTest();
 
     void sqlDataConverterTest();
 private:
@@ -72,6 +73,11 @@ void InvControllerTests::SQLSelectEntitiesTest()
     QList<DbEntity*> result;
     ctx.SelectEntities(Inventory::ENTITYNAME,filter,result);
     QVERIFY2(true, "Failure");
+}
+
+void InvControllerTests::SQLCreateDBTest()
+{
+    ctx.CreateDatabase();
 }
 
 void InvControllerTests::sqlDataConverterTest()

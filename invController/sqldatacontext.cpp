@@ -2,6 +2,7 @@
 #include "sqldatacontext.h"
 #include "sqlitedataconverter.h"
 #include <QDebug>
+#include <inventory.h>
 
 SQLDataContext::SQLDataContext(const QString &dbtype, const QString &dbname)
 {
@@ -65,7 +66,10 @@ void SQLDataContext::SelectEntitiesImplementation(const QString entityname, cons
 
 void SQLDataContext::CreateDatabaseImplementation()
 {
-    //Create the datebase in given Relational database if it doesn't exist
+    DbEntity *entity = new Inventory();
+    QString q;
+    buildCreateQuery(q,entity);
+    qDebug()<<q;
 }
 
 void SQLDataContext::buildSelectQuery(QString &q, const QStringList &columns, const QString &table, const QStringList &filter)
@@ -190,8 +194,6 @@ void SQLDataContext::buildInsertQuery(QString &q, const QStringList &columns, co
     q = str;
 }
 
-
-
 void SQLDataContext::buildUpdateQuery(QString &q, const QStringList &keyvalPairs, const QString &table, const QStringList &filter)
 {
     QStringList q_str;
@@ -223,7 +225,7 @@ void SQLDataContext::buildUpdateQuery(QString &q, const QStringList &keyvalPairs
     q = str;
 }
 
-void SQLDataContext::buildCreateQuery(QString &q, const DbEntity * entity)
+void SQLDataContext::buildCreateQuery(QString &q, DbEntity * entity)
 {
     QStringList q_str;
     //CREATE TABLE IF NOT EXISTS Testing(Id INTEGER,NAME TEXT)
@@ -247,7 +249,7 @@ void SQLDataContext::buildCreateQuery(QString &q, const DbEntity * entity)
     q = str;
 }
 
-QStringList SQLDataContext::buildCreateFields(const DbEntity *entity)
+QStringList SQLDataContext::buildCreateFields(DbEntity *entity)
 {
     QHash<QString,QVariant> dbvalues = entity->dbValues();
 
@@ -277,6 +279,15 @@ QStringList SQLDataContext::buildCreateFields(const DbEntity *entity)
         result.append(keyVal);
     }
     return result;
+}
+
+void SQLDataContext::executeQuery(QString &q, QList<DbEntity> &result)
+{
+    if (query.exec(q)){
+        while (query.next()) {
+            DbEntity *item =
+        }
+    }
 }
 
 QString SQLDataContext::sqlStr() const

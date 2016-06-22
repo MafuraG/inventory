@@ -29,6 +29,6 @@ private:
     REAL — a floating point value
     TEXT — a text string
     BLOB — a blob of data
- * /
+ ***/
 
 #endif // SQLITEDATACONVERTER_H
