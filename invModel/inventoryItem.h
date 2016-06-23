@@ -19,11 +19,9 @@ private:
     unsigned int m_manId;
 
 private:
-    virtual QHash<QString, QVariant> dbValuesImplementation();
-
-    // DbEntity interface
-private:
+    virtual QHash<QString, QVariant> dbValuesImplementation();   
     virtual QString getEntityNameImplementation();
+    virtual void setDbValuesImplementation(const QHash<QString, QVariant> &dbValues);
 };
 
 #endif // CARTMODEL_H

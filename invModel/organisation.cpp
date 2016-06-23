@@ -43,4 +43,14 @@ QString Organisation::getEntityNameImplementation()
     return Organisation::ENTITYNAME;
 }
 
+void Organisation::setDbValuesImplementation(const QHash<QString, QVariant> &dbValues)
+{
+    if (dbValues.count() > 0) {
+        setId(dbValues[ID].toUInt());
+        setName(dbValues[Name].toString());
+        setAddress(dbValues[ADDRESS].toString());
+        setTelephone(dbValues[TELEPHONE].toString());
+    }
+}
+
 

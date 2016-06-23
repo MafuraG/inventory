@@ -78,6 +78,19 @@ QString Inventory::getEntityNameImplementation()
     return Inventory::ENTITYNAME;
 }
 
+void Inventory::setDbValuesImplementation(const QHash<QString, QVariant> &dbValues)
+{
+    if (dbValues.count() > 0) {
+        setInventoryTypeId(dbValues[INVENTORYTYPEID].toUInt());
+        setModelId(dbValues[MODELID].toUInt());
+        setId(dbValues[ID].toUInt());
+        setName(dbValues[Name].toString());
+        setNumber(dbValues[NUMBER].toString());
+        setOwnerId(dbValues[OWNERID].toUInt());
+        setSerial(dbValues[SERIAL].toString());
+    }
+}
+
 QString Inventory::INVENTORYTYPEID = "inventory_type_id";
 QString Inventory::MODELID = "model_id";
 QString Inventory::NUMBER = "number";

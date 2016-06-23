@@ -44,5 +44,12 @@ QString DbEntity::getEntityName()
     return getEntityNameImplementation();
 }
 
+void DbEntity::setDbValues(const QHash<QString, QVariant> &dbValues)
+{
+    m_dbValues = dbValues;
+    setDbValuesImplementation(dbValues);
+}
+
+
 
 

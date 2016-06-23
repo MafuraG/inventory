@@ -24,6 +24,8 @@ private Q_SLOTS:
 
     void journalTest();
     void journaldbvaluesTest();
+    void journalsetdbValuesTest();
+
 };
 
 InvModelTest::InvModelTest()
@@ -218,6 +220,26 @@ void InvModelTest::journaldbvaluesTest()
     QVERIFY2(dbval_exp[Journal::COMMENT] == dbval_actual[Journal::COMMENT], "Failure");
     QVERIFY2(dbval_exp[Journal::DATE] == dbval_actual[Journal::DATE], "Failure");
     QVERIFY2(dbval_exp[Journal::STATUSID] == dbval_actual[Journal::STATUSID], "Failure");
+}
+
+void InvModelTest::journalsetdbValuesTest()
+{
+    Journal expected, actual;
+    expected.setId(1);
+    expected.setName("j1");
+    expected.setInventoryID(1);
+    expected.setComment("Comment");
+    expected.setDate("Date");
+    expected.setStatusID(1);
+
+    actual.setDbValues(expected.dbValues());
+
+    QVERIFY2(expected.id() == actual.id(), "Failure");
+    QVERIFY2(expected.name() == actual.name(), "Failure");
+    QVERIFY2(expected.inventoryID() == actual.inventoryID(), "Failure");
+    QVERIFY2(expected.date() == actual.date(), "Failure");
+    QVERIFY2(expected.comment() == actual.comment(), "Failure");
+    QVERIFY2(expected.statusID() == actual.statusID(), "Failure");
 }
 
 QTEST_APPLESS_MAIN(InvModelTest)

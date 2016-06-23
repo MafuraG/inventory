@@ -62,6 +62,18 @@ QString Journal::getEntityNameImplementation()
     return Journal::ENTITYNAME;
 }
 
+void Journal::setDbValuesImplementation(const QHash<QString, QVariant> &dbValues)
+{
+    if (dbValues.count() > 0) {
+        setId(dbValues[ID].toUInt());
+        setName(dbValues[Name].toString());
+        setDate(dbValues[DATE].toString());
+        setInventoryID(dbValues[INVENTORYID].toUInt());
+        setStatusID(dbValues[STATUSID].toUInt());
+        setComment(dbValues[COMMENT].toString());
+    }
+}
+
 
 QString Journal::COMMENT = "comment";
 QString Journal::DATE = "date_";

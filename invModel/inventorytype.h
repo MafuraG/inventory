@@ -17,6 +17,10 @@ private:
     // DbEntity interface
 private:
     virtual QString getEntityNameImplementation();
+
+    // DbEntity interface
+private:
+    virtual void setDbValuesImplementation(const QHash<QString, QVariant> &dbValues);
 };
 
 #endif // INVENTORYTYPE_H

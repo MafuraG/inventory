@@ -22,6 +22,7 @@ public:
     void setId(unsigned int id);
 
     QHash<QString, QVariant> dbValues();
+    void setDbValues(const QHash<QString, QVariant> &dbValues);
     QString getEntityName();
 
 private:
@@ -30,6 +31,7 @@ private:
     QHash<QString,QVariant> m_dbValues;
 
     virtual QHash<QString,QVariant> dbValuesImplementation() = 0;
+    virtual void setDbValuesImplementation(const QHash<QString, QVariant> &dbValues) = 0;
     virtual QString getEntityNameImplementation() = 0;
 };
 

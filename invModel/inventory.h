@@ -14,6 +14,7 @@ public:
     static QString OWNERID;
     static QString INVENTORYTYPEID;
     static QString ENTITYNAME;
+
     Inventory();
     virtual ~Inventory();
     unsigned int modelId() const;
@@ -40,11 +41,9 @@ private:
 
     // DbEntity interface
 private:
-    virtual QHash<QString, QVariant> dbValuesImplementation();
-
-    // DbEntity interface
-private:
+    virtual QHash<QString, QVariant> dbValuesImplementation();    
     virtual QString getEntityNameImplementation();
+    virtual void setDbValuesImplementation(const QHash<QString, QVariant> &dbValues);
 };
 
 #endif // INVENTORY_H

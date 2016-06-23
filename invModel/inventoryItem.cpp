@@ -29,5 +29,14 @@ QString InventoryItem::getEntityNameImplementation()
     return InventoryItem::ENTITYNAME;
 }
 
+void InventoryItem::setDbValuesImplementation(const QHash<QString, QVariant> &dbValues)
+{
+    if (dbValues.count() > 0) {
+        setId(dbValues[ID].toUInt());
+        setName(dbValues[Name].toString());
+        setManId(dbValues[MAN_ID].toUInt());
+    }
+}
+
 QString InventoryItem::MAN_ID = "man_id";
 QString InventoryItem::ENTITYNAME = "invent_detail";

@@ -36,7 +36,8 @@ private:
     void buildCreateQuery(QString &q, DbEntity *entity);
     QStringList buildkeyValPairs(const QHash<QString, QVariant> &dbvalues, const QString &separator);
     QStringList buildCreateFields(DbEntity *entity);
-    void executeQuery(QString &q, QList<DbEntity> &result);
+    void executeQuery(const QString &q, const QString &entityName, QList<DbEntity> &result);
+    DbEntity *createNewEntity(const QString &entityName);
 
     QSqlDatabase db;
     QSqlQuery query;

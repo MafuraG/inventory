@@ -3,6 +3,12 @@
 #include "sqlitedataconverter.h"
 #include <QDebug>
 #include <inventory.h>
+#include <inventoryItem.h>
+#include <inventorystatus.h>
+#include <inventorytype.h>
+#include <journal.h>
+#include <manufacturer.h>
+#include <organisation.h>
 
 SQLDataContext::SQLDataContext(const QString &dbtype, const QString &dbname)
 {
@@ -281,13 +287,59 @@ QStringList SQLDataContext::buildCreateFields(DbEntity *entity)
     return result;
 }
 
-void SQLDataContext::executeQuery(QString &q, QList<DbEntity> &result)
+void SQLDataContext::executeQuery(const QString &q,const QString &entityName, QList<DbEntity> &result)
 {
     if (query.exec(q)){
         while (query.next()) {
-            DbEntity *item =
+            DbEntity *item = createNewEntity(entityName);
+
+            QHash<QString, QVariant> dbvalues = item->dbValues();
+            QList<QString> keys = dbvalues.keys();
+            QList<QVariant> values = dbvalues.values();
+            for(int i = 0 ; i < dbvalues.count(); i++){
+                QString key = keys[i];
+                QVariant val = values[i];
+                dbvalues[key] = query.value(key);
+            }
         }
     }
+}
+
+DbEntity *SQLDataContext::createNewEntity(const QString &entityName)
+{
+    DbEntity *entity = nullptr;
+
+
+    if (entityName == Inventory::ENTITYNAME){
+        entity = new Inventory();
+        return entity;
+    }
+    if (entityName ==InventoryItem::ENTITYNAME){
+        entity = new InventoryItem();
+        return entity;
+     }
+    if (entityName ==InventoryStatus::ENTITYNAME){
+        entity = new InventoryStatus();
+        return entity;
+    }
+    if (entityName ==InventoryType::ENTITYNAME){
+        entity = new InventoryType();
+        return entity;
+    }
+    if (entityName == Journal::ENTITYNAME){
+        entity = new Journal();
+        return entity;
+    }
+    if (entityName == Manufacturer::ENTITYNAME){
+            entity = new Manufacturer();
+            return entity;
+    }
+    if (entityName == Organisation::ENTITYNAME){
+            entity = new Organisation();
+            return entity;
+    }
+
+    return entity;
 }
 
 QString SQLDataContext::sqlStr() const
