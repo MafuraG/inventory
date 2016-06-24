@@ -1,7 +1,7 @@
 #include "dbentity.h"
 
 
-QString DbEntity::ID = "id_";
+QString DbEntity::ID = "id";
 QString DbEntity::Name= "name_";
 
 DbEntity::DbEntity()

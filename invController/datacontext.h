@@ -5,7 +5,7 @@
 /**
  * @brief The DataContext class
  *
- * Non Virtual Interface Idiom (NVI)
+ * Using Non Virtual Interface Idiom (NVI)
  * more in http://www.gotw.ca/publications/mill18.htm
  */
 
@@ -19,6 +19,7 @@ public:
     void UpdateEntity(DbEntity *entity);
     void SelectEntities(const QString entityname, const QStringList &filter, QList<DbEntity*> &selectedEntities);
     void CreateDatabase();
+    QStringList GetEntitiesList();
 
     virtual ~DataContext(){}
 
@@ -28,6 +29,7 @@ private:
     virtual void UpdateEntityImplementation(DbEntity *entity) = 0;
     virtual void SelectEntitiesImplementation(const QString entityname, const QStringList &filter, QList<DbEntity*> &selectedEntities) = 0;
     virtual void CreateDatabaseImplementation() = 0;
+    virtual QStringList GetEntitiesListImplementation() = 0;
 };
 
 #endif // DATACONTEXT_H

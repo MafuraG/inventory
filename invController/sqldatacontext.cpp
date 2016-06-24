@@ -22,7 +22,7 @@ SQLDataContext::SQLDataContext(const QString &dbtype, const QString &dbname)
     }
     else
     {
-        //qDebug()<< "Error :"<<db.lastError();
+        qDebug()<< "Error :"<<db.lastError();
     }
 }
 
@@ -38,6 +38,8 @@ void SQLDataContext::CreateEntityImplementation(DbEntity *entity)
     buildInsertQuery(q,vals.keys(),entity->getEntityName(),vals.values());
     setSqlStr(q);
     qDebug()<<sqlStr();
+    QList<DbEntity*> result;
+    executeQuery(q,entity->getEntityName(),result);
 }
 
 void SQLDataContext::DeleteEntityImplementation(DbEntity *entity)
@@ -58,6 +60,9 @@ void SQLDataContext::UpdateEntityImplementation(DbEntity *entity)
     buildUpdateQuery(q,updatePairs,entity->getEntityName(),filter);
     setSqlStr(q);
     qDebug()<<sqlStr();
+
+    QList<DbEntity*> result;
+    executeQuery(q,entity->getEntityName(),result);
 }
 
 void SQLDataContext::SelectEntitiesImplementation(const QString entityname, const QStringList &filter, QList<DbEntity *> &selectedEntities)
@@ -67,15 +72,35 @@ void SQLDataContext::SelectEntitiesImplementation(const QString entityname, cons
     QStringList columns;
     buildSelectQuery(q,columns,entityname,filter);
     setSqlStr(q);
-    qDebug()<<sqlStr();
+    qDebug()<<sqlStr();    
+
+    executeQuery(q,entityname,selectedEntities);
 }
 
 void SQLDataContext::CreateDatabaseImplementation()
 {
-    DbEntity *entity = new Inventory();
-    QString q;
-    buildCreateQuery(q,entity);
-    qDebug()<<q;
+    QStringList entityNames = GetEntitiesList();
+    for(QString entityName:entityNames){
+        //create tables
+        QString q;
+        QList<DbEntity*> result;
+        buildCreateQuery(q,entityName);
+        executeQuery(q,entityName,result);
+        qDebug()<<q;
+    }
+}
+
+QStringList SQLDataContext::GetEntitiesListImplementation()
+{
+    QStringList list;
+    list.append(Inventory::ENTITYNAME);
+    list.append(InventoryItem::ENTITYNAME);
+    list.append(InventoryStatus::ENTITYNAME);
+    list.append(InventoryType::ENTITYNAME);
+    list.append(Journal::ENTITYNAME);
+    list.append(Manufacturer::ENTITYNAME);
+    list.append(Organisation::ENTITYNAME);
+    return list;
 }
 
 void SQLDataContext::buildSelectQuery(QString &q, const QStringList &columns, const QString &table, const QStringList &filter)
@@ -231,15 +256,15 @@ void SQLDataContext::buildUpdateQuery(QString &q, const QStringList &keyvalPairs
     q = str;
 }
 
-void SQLDataContext::buildCreateQuery(QString &q, DbEntity * entity)
+void SQLDataContext::buildCreateQuery(QString &q, const QString entityName)
 {
     QStringList q_str;
     //CREATE TABLE IF NOT EXISTS Testing(Id INTEGER,NAME TEXT)
-    QStringList createfields = buildCreateFields(entity);
+    QStringList createfields = buildCreateFields(entityName);
 
 
     q_str.append("CREATE TABLE IF NOT EXISTS ");
-    q_str.append(QString("%0 ").arg(entity->getEntityName()));
+    q_str.append(QString("%0 ").arg(entityName));
 
     q_str.append(" ( ");
     buildString(q_str,createfields,QString(","));
@@ -255,8 +280,9 @@ void SQLDataContext::buildCreateQuery(QString &q, DbEntity * entity)
     q = str;
 }
 
-QStringList SQLDataContext::buildCreateFields(DbEntity *entity)
+QStringList SQLDataContext::buildCreateFields(const QString &entityName)
 {
+    DbEntity *entity = createNewEntity(entityName);
     QHash<QString,QVariant> dbvalues = entity->dbValues();
 
     QList<QString> keys = dbvalues.keys();
@@ -287,20 +313,20 @@ QStringList SQLDataContext::buildCreateFields(DbEntity *entity)
     return result;
 }
 
-void SQLDataContext::executeQuery(const QString &q,const QString &entityName, QList<DbEntity> &result)
+void SQLDataContext::executeQuery(const QString &q,const QString &entityName, QList<DbEntity*> &result)
 {
     if (query.exec(q)){
         while (query.next()) {
             DbEntity *item = createNewEntity(entityName);
 
             QHash<QString, QVariant> dbvalues = item->dbValues();
-            QList<QString> keys = dbvalues.keys();
-            QList<QVariant> values = dbvalues.values();
+            QList<QString> keys = dbvalues.keys();            
             for(int i = 0 ; i < dbvalues.count(); i++){
-                QString key = keys[i];
-                QVariant val = values[i];
+                QString key = keys[i];                
                 dbvalues[key] = query.value(key);
             }
+
+            result.append(item);
         }
     }
 }

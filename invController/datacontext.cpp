@@ -29,3 +29,8 @@ void DataContext::CreateDatabase()
 {
     CreateDatabaseImplementation();
 }
+
+QStringList DataContext::GetEntitiesList()
+{
+    return GetEntitiesListImplementation();
+}

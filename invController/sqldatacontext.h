@@ -5,6 +5,7 @@
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlError>
 
 
 
@@ -25,6 +26,7 @@ private:
     virtual void UpdateEntityImplementation(DbEntity *entity);
     virtual void SelectEntitiesImplementation(const QString entityname, const QStringList &filter, QList<DbEntity*> &selectedEntities);
     virtual void CreateDatabaseImplementation();
+    virtual QStringList GetEntitiesListImplementation();
 
 
     void buildSelectQuery(QString &q, const QStringList &columns, const QString &table, const QStringList &filter);
@@ -33,15 +35,17 @@ private:
     void buildFilter(QString &q,  const QString &oper, const QStringList &params);
     void buildInsertQuery(QString &q, const QStringList &columns, const QString &table, const QList<QVariant> &values);
     void buildUpdateQuery(QString &q, const QStringList &keyvalPairs, const QString &table, const QStringList &filter);
-    void buildCreateQuery(QString &q, DbEntity *entity);
+    void buildCreateQuery(QString &q, const QString entityName);
     QStringList buildkeyValPairs(const QHash<QString, QVariant> &dbvalues, const QString &separator);
-    QStringList buildCreateFields(DbEntity *entity);
-    void executeQuery(const QString &q, const QString &entityName, QList<DbEntity> &result);
+    QStringList buildCreateFields(const QString &entityName);
+    void executeQuery(const QString &q, const QString &entityName, QList<DbEntity *> &result);
     DbEntity *createNewEntity(const QString &entityName);
 
     QSqlDatabase db;
     QSqlQuery query;
     QString m_sqlStr;
+
+
 };
 
 #endif // SQLDATACONTEXT_H
