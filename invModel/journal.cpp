@@ -73,6 +73,86 @@ void Journal::setDbValuesImplementation(const QHash<QString, QVariant> &dbValues
         setComment(dbValues[COMMENT].toString());
     }
 }
+QVariant Journal::dataImplementation(const unsigned int col)
+{
+    QHash<QString, QVariant> dBvalues = dbValues();
+    if (col == 0 ){
+        //ID
+        return dBvalues[ID];
+    }
+    if (col == 1 ){
+        //Name
+        return dBvalues[Name];
+    }
+
+    if (col == 2 ){
+        //Date
+        return dBvalues[DATE];
+    }
+
+    if (col == 3) {
+        //Inventory ID
+        return dBvalues[INVENTORYID];
+    }
+
+    if (col == 4){
+        //Status ID
+        return dBvalues[STATUSID];
+    }
+
+    if (col == 5){
+        //COMMENT
+        return dBvalues[COMMENT];
+    }
+    return QVariant();
+
+}
+
+bool Journal::setDataImplementation(const unsigned int col, QVariant value)
+{
+    QHash<QString, QVariant> dBvalues = dbValues();
+    bool success = false;
+    if (col == 0 ){
+        //ID
+        dBvalues[ID] = value;
+        success = true;
+    }
+    if (col == 1 ){
+        //Name
+        dBvalues[Name] = value;
+        success = true;
+    }
+
+    if (col == 2 ){
+        //Date
+        dBvalues[DATE] = value;
+        success = true;
+    }
+
+    if (col == 3) {
+        //Inventory ID
+        dBvalues[INVENTORYID] = value;
+        success = true;
+    }
+
+    if (col == 4){
+        //Status ID
+        dBvalues[STATUSID] = value;
+        success = true;
+    }
+
+    if (col == 5){
+        //COMMENT
+        dBvalues[COMMENT] = value;
+        success = true;
+    }
+
+    if (success == true) {
+        setDbValues(dBvalues);
+    }
+
+    return success;
+}
 
 
 QString Journal::COMMENT = "comment";

@@ -27,15 +27,11 @@ private:
 
     // DbEntity interface
 private:
-    virtual QHash<QString, QVariant> dbValuesImplementation();
-
-    // DbEntity interface
-private:
+    virtual QHash<QString, QVariant> dbValuesImplementation();    
     virtual QString getEntityNameImplementation();
-
-    // DbEntity interface
-private:
     virtual void setDbValuesImplementation(const QHash<QString, QVariant> &dbValues);
+    virtual QVariant dataImplementation(const unsigned int col);
+    virtual bool setDataImplementation(const unsigned int col, QVariant value);
 };
 
 #endif // ORGANISATION_H

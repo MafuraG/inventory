@@ -103,6 +103,11 @@ QStringList SQLDataContext::GetEntitiesListImplementation()
     return list;
 }
 
+DbEntity *SQLDataContext::CreateNewEntityImplementation(const QString entityName)
+{
+    return createNewSqlEntity(entityName);
+}
+
 void SQLDataContext::buildSelectQuery(QString &q, const QStringList &columns, const QString &table, const QStringList &filter)
 {
     QStringList q_str;
@@ -282,7 +287,7 @@ void SQLDataContext::buildCreateQuery(QString &q, const QString entityName)
 
 QStringList SQLDataContext::buildCreateFields(const QString &entityName)
 {
-    DbEntity *entity = createNewEntity(entityName);
+    DbEntity *entity = createNewSqlEntity(entityName);
     QHash<QString,QVariant> dbvalues = entity->dbValues();
 
     QList<QString> keys = dbvalues.keys();
@@ -317,7 +322,7 @@ void SQLDataContext::executeQuery(const QString &q,const QString &entityName, QL
 {
     if (query.exec(q)){
         while (query.next()) {
-            DbEntity *item = createNewEntity(entityName);
+            DbEntity *item = createNewSqlEntity(entityName);
 
             QHash<QString, QVariant> dbvalues = item->dbValues();
             QList<QString> keys = dbvalues.keys();            
@@ -331,7 +336,7 @@ void SQLDataContext::executeQuery(const QString &q,const QString &entityName, QL
     }
 }
 
-DbEntity *SQLDataContext::createNewEntity(const QString &entityName)
+DbEntity *SQLDataContext::createNewSqlEntity(const QString &entityName)
 {
     DbEntity *entity = nullptr;
 

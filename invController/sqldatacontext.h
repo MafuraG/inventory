@@ -27,6 +27,7 @@ private:
     virtual void SelectEntitiesImplementation(const QString entityname, const QStringList &filter, QList<DbEntity*> &selectedEntities);
     virtual void CreateDatabaseImplementation();
     virtual QStringList GetEntitiesListImplementation();
+    virtual DbEntity *CreateNewEntityImplementation(const QString entityName);
 
 
     void buildSelectQuery(QString &q, const QStringList &columns, const QString &table, const QStringList &filter);
@@ -39,12 +40,11 @@ private:
     QStringList buildkeyValPairs(const QHash<QString, QVariant> &dbvalues, const QString &separator);
     QStringList buildCreateFields(const QString &entityName);
     void executeQuery(const QString &q, const QString &entityName, QList<DbEntity *> &result);
-    DbEntity *createNewEntity(const QString &entityName);
+    DbEntity *createNewSqlEntity(const QString &entityName);
 
     QSqlDatabase db;
     QSqlQuery query;
     QString m_sqlStr;
-
 
 };
 

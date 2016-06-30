@@ -10,6 +10,11 @@ void DataContext::CreateEntity(DbEntity *entity)
     CreateEntityImplementation(entity);
 }
 
+DbEntity *DataContext::CreateNewEntity(const QString entityName)
+{
+    return CreateNewEntityImplementation(entityName);
+}
+
 void DataContext::DeleteEntity(DbEntity *entity)
 {
     DeleteEntityImplementation(entity);

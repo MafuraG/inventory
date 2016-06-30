@@ -14,6 +14,7 @@ public:
     static QString OWNERID;
     static QString INVENTORYTYPEID;
     static QString ENTITYNAME;
+    static unsigned int COLCOUNT;
 
     Inventory();
     virtual ~Inventory();
@@ -44,6 +45,8 @@ private:
     virtual QHash<QString, QVariant> dbValuesImplementation();    
     virtual QString getEntityNameImplementation();
     virtual void setDbValuesImplementation(const QHash<QString, QVariant> &dbValues);
+    virtual QVariant dataImplementation(const unsigned int col);
+    virtual bool setDataImplementation(const unsigned int col, QVariant value);    
 };
 
 #endif // INVENTORY_H

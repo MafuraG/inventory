@@ -44,9 +44,23 @@ QString DbEntity::getEntityName()
     return getEntityNameImplementation();
 }
 
-void DbEntity::setDbValues(const QHash<QString, QVariant> &dbValues)
+unsigned int DbEntity::getColumnCount()
 {
-    m_dbValues = dbValues;
+    return dbValues().count();
+}
+
+QVariant DbEntity::data(const unsigned int col)
+{
+    return dataImplementation(col);
+}
+
+bool DbEntity::setData(const unsigned int col, QVariant value)
+{
+    return setDataImplementation(col,value);
+}
+
+void DbEntity::setDbValues(const QHash<QString, QVariant> &dbValues)
+{    
     setDbValuesImplementation(dbValues);
 }
 

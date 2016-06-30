@@ -53,4 +53,63 @@ void Organisation::setDbValuesImplementation(const QHash<QString, QVariant> &dbV
     }
 }
 
+QVariant Organisation::dataImplementation(const unsigned int col)
+{
+    QHash<QString, QVariant> dBvalues = dbValues();
+    if (col == 0 ){
+        //ID
+        return dBvalues[ID];
+    }
+    if (col == 1 ){
+        //Name
+        return dBvalues[Name];
+    }
+
+    if (col == 2){
+        //Address
+        return dBvalues[ADDRESS];
+    }
+
+    if (col == 3){
+        //Telephone
+        return dBvalues[TELEPHONE];
+    }
+
+    return QVariant();
+
+}
+
+bool Organisation::setDataImplementation(const unsigned int col, QVariant value)
+{
+    QHash<QString, QVariant> dBvalues = dbValues();
+    bool success = false;
+    if (col == 0 ){
+        //ID
+        dBvalues[ID] = value;
+        success = true;
+    }
+    if (col == 1 ){
+        //Name
+        dBvalues[Name] = value;
+        success = true;
+    }
+
+    if (col == 2){
+        //Address
+        dBvalues[ADDRESS] = value;
+    }
+
+    if (col == 3){
+        //Telephone
+        dBvalues[TELEPHONE] = value;
+    }
+
+    if (success == true) {
+        setDbValues(dBvalues);
+    }
+
+
+    return success;
+}
+
 

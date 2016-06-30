@@ -15,6 +15,7 @@ class DataContext
 public:
     DataContext();
     void CreateEntity(DbEntity *entity);
+    DbEntity *CreateNewEntity(const QString entityName);
     void DeleteEntity(DbEntity *entity);
     void UpdateEntity(DbEntity *entity);
     void SelectEntities(const QString entityname, const QStringList &filter, QList<DbEntity*> &selectedEntities);
@@ -30,6 +31,7 @@ private:
     virtual void SelectEntitiesImplementation(const QString entityname, const QStringList &filter, QList<DbEntity*> &selectedEntities) = 0;
     virtual void CreateDatabaseImplementation() = 0;
     virtual QStringList GetEntitiesListImplementation() = 0;
+    virtual DbEntity *CreateNewEntityImplementation(const QString entityName) = 0;
 };
 
 #endif // DATACONTEXT_H

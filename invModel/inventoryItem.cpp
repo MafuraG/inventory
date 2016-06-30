@@ -38,5 +38,52 @@ void InventoryItem::setDbValuesImplementation(const QHash<QString, QVariant> &db
     }
 }
 
+QVariant InventoryItem::dataImplementation(const unsigned int col)
+{
+    QHash<QString, QVariant> dBvalues = dbValues();
+    if (col == 0 ){
+        //ID
+        return dBvalues[ID];
+    }
+    if (col == 1 ){
+        //Name
+        return dBvalues[Name];
+    }
+    if (col == 2){
+       //MAN_ID
+        return dBvalues[MAN_ID];
+    }
+
+    return QVariant();
+
+}
+
+bool InventoryItem::setDataImplementation(const unsigned int col, QVariant value)
+{
+    QHash<QString, QVariant> dBvalues = dbValues();
+    bool success = false;
+    if (col == 0 ){
+        //ID
+        dBvalues[ID] = value;
+        success = true;
+    }
+    if (col == 1 ){
+        //Name
+        dBvalues[Name] = value;
+        success = true;
+    }
+    if (col == 2){
+       //MAN_ID
+        dBvalues[MAN_ID] = value;
+        success = true;
+    }
+
+    if (success == true) {
+        setDbValues(dBvalues);
+    }
+
+    return success;
+}
+
 QString InventoryItem::MAN_ID = "man_id";
 QString InventoryItem::ENTITYNAME = "invent_detail";

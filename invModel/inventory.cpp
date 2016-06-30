@@ -63,13 +63,14 @@ void Inventory::setInventoryTypeId(unsigned int inventoryType)
 QHash<QString, QVariant> Inventory::dbValuesImplementation()
 {
     QHash <QString,QVariant> keyVals;
+    keyVals[Name] = name();
+    keyVals[ID] =id();
     keyVals[INVENTORYTYPEID] = inventoryTypeId();
     keyVals[MODELID] = modelId();
     keyVals[NUMBER] = number();
     keyVals[OWNERID] = ownerId();
     keyVals[SERIAL] = serial();
-    keyVals[Name] = name();
-    keyVals[ID] =id();
+
     return keyVals;
 }
 
@@ -89,6 +90,97 @@ void Inventory::setDbValuesImplementation(const QHash<QString, QVariant> &dbValu
         setOwnerId(dbValues[OWNERID].toUInt());
         setSerial(dbValues[SERIAL].toString());
     }
+}
+
+QVariant Inventory::dataImplementation(const unsigned int col)
+{
+    QHash<QString, QVariant> dBvalues = dbValues();
+    if (col == 0 ){
+        //ID
+        return dBvalues[ID];
+    }
+    if (col == 1 ){
+        //Name
+        return dBvalues[Name];
+    }
+    if (col == 2){
+       //Inventory type
+        return dBvalues[INVENTORYTYPEID];
+    }
+
+    if (col == 3){
+        //Model id
+        return dBvalues[MODELID];
+    }
+
+    if (col == 4){
+        //Number
+        return dBvalues[NUMBER];
+    }
+
+    if (col == 5){
+        //Ownerid
+        return dBvalues[OWNERID];
+    }
+
+    if (col == 6){
+        //Serial
+        return dBvalues[SERIAL];
+    }
+
+    return QVariant();
+
+}
+
+bool Inventory::setDataImplementation(const unsigned int col, QVariant value)
+{
+    QHash<QString, QVariant> dBvalues = dbValues();
+    bool success = false;
+    if (col == 0 ){
+        //ID
+        dBvalues[ID] = value;
+        success = true;
+    }
+    if (col == 1 ){
+        //Name
+        dBvalues[Name] = value;
+        success = true;
+    }
+    if (col == 2){
+       //Inventory type
+        dBvalues[INVENTORYTYPEID] = value;
+        success = true;
+    }
+
+    if (col == 3){
+        //Model id
+        dBvalues[MODELID] = value;
+        success = true;
+    }
+
+    if (col == 4){
+        //Number
+        dBvalues[NUMBER] = value;
+        success = true;
+    }
+
+    if (col == 5){
+        //Ownerid
+        dBvalues[OWNERID] = value;
+        success = true;
+    }
+
+    if (col == 6){
+        //Serial
+        dBvalues[SERIAL] = value;
+        success = true;
+    }
+
+    if (success == true) {
+        setDbValues(dBvalues);
+    }
+
+    return success;
 }
 
 QString Inventory::INVENTORYTYPEID = "inventory_type_id";
