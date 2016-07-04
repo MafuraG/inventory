@@ -18,14 +18,18 @@ SOURCES += invcontroller.cpp \
     sqldatacontext.cpp \
     dataconverter.cpp \
     sqlitedataconverter.cpp \
-    dbentitytablemodel.cpp
+    dbentitytablemodel.cpp \
+    inventorytablemodel.cpp \
+    jounaltablemodel.cpp
 
 HEADERS += invcontroller.h \
     datacontext.h \
     sqldatacontext.h \
     dataconverter.h \
     sqlitedataconverter.h \
-    dbentitytablemodel.h
+    dbentitytablemodel.h \
+    inventorytablemodel.h \
+    jounaltablemodel.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

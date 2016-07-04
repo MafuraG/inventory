@@ -2,6 +2,8 @@
 #include <QtTest>
 #include <dataconverter.h>
 #include <inventory.h>
+#include <inventorytablemodel.h>
+#include <jounaltablemodel.h>
 #include <sqldatacontext.h>
 #include <sqlitedataconverter.h>
 
@@ -19,8 +21,12 @@ private Q_SLOTS:
     void SQLCreateDBTest();
 
     void sqlDataConverterTest();
+
+    void JournalTableModelTest();
+    void InventoryTableModelTest();
 private:
     SQLDataContext ctx;
+    void entityTableModelTest(DbEntityTableModel *model);
 };
 
 InvControllerTests::InvControllerTests()
@@ -90,6 +96,41 @@ void InvControllerTests::sqlDataConverterTest()
     actual = c->toDbString(param);
 
     QVERIFY2(expected == actual, "FAIL");
+}
+
+void InvControllerTests::JournalTableModelTest()
+{
+    JounalTableModel model;
+    entityTableModelTest(&model);
+}
+
+void InvControllerTests::InventoryTableModelTest()
+{
+    InventoryTableModel model;
+    entityTableModelTest(&model);
+}
+
+void InvControllerTests::entityTableModelTest(DbEntityTableModel *model)
+{
+
+    model->insertRows(0,50);
+    //qDebug()<<"50 rows added"<<model->rowCount();
+
+    QVERIFY2(model->rowCount() == 50, "FAIL");
+
+    model->removeRows(0,50);
+
+    QVERIFY2(model->rowCount() == 0, "FAIL");
+
+    qDebug()<<"Insert and Remove passed!";
+
+    DbEntity *entity = model->newDbEntity();
+
+    qDebug()<<"Entity create Passed";
+
+    qDebug()<<"model column count "<<model->columnCount();
+    qDebug()<<"entity column count "<<entity->getColumnCount();
+    QVERIFY2(model->columnCount() == entity->getColumnCount(), "FAIL");
 }
 
 QTEST_APPLESS_MAIN(InvControllerTests)

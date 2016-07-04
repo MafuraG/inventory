@@ -1,10 +1,10 @@
 #include "dbentitytablemodel.h"
-
+#include <QDebug>
 #include <dbentity.h>
 
-DbEntityTableModel::DbEntityTableModel(const QString entityName)
+DbEntityTableModel::DbEntityTableModel()
 {
-    setEntityName(entityName);
+    //setEntityName(entityName);
 }
 
 int DbEntityTableModel::rowCount(const QModelIndex &parent) const
@@ -12,14 +12,11 @@ int DbEntityTableModel::rowCount(const QModelIndex &parent) const
     return m_entityList.count();
 }
 
-int DbEntityTableModel::columnCount(const QModelIndex &parent)
-{
-    return columnCountImplementation();
-}
-
 int DbEntityTableModel::columnCount(const QModelIndex &parent) const
 {
-    return columnCount(parent);
+    //return columnCount();
+    int col = getHeaders().count();
+    return col;
 }
 
 QVariant DbEntityTableModel::data(const QModelIndex &index, int role) const
@@ -59,6 +56,15 @@ QVariant DbEntityTableModel::headerData(int section, Qt::Orientation orientation
     return QVariant();
 }
 
+void DbEntityTableModel::setHeaders(const QVector<QString> &headers)
+{
+    m_headers = headers;
+}
+
+QVector<QString> DbEntityTableModel::getHeaders() const {
+    return m_headers;
+}
+
 QVariant DbEntityTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     return headerData(section,orientation,role);
@@ -85,11 +91,12 @@ bool DbEntityTableModel::removeRows(int row, int count, const QModelIndex &paren
 
     beginRemoveRows(parent, row, row + count - 1);
     for(int i = row; i < row + count; i++){
+        //qDebug()<<"Removed row at : "<< i;
         delete m_entityList[row];
-        m_entityList.removeAt(row);
+        m_entityList.removeAt(row);        
     }
     endRemoveRows();
-
+    //qDebug()<<"Success! rows removed";
     return success;
 }
 
@@ -131,7 +138,7 @@ DbEntity *DbEntityTableModel::newDbEntity()
 
 void DbEntityTableModel::removeDbEntity(const unsigned int row)
 {
-     removeRows(row,1);
+    removeRows(row,1);
 }
 
 DbEntity *DbEntityTableModel::getItem(const QModelIndex &index) const
