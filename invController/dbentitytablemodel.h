@@ -28,6 +28,8 @@ public:
     DbEntity *getDbEntity(const unsigned int row);
 
     QList<DbEntity *> getEntityList() const;
+
+    void addDbEntity();
     DbEntity *newDbEntity();
     void removeDbEntity(const unsigned int row);
 
@@ -39,9 +41,8 @@ private:
     QList<DbEntity*> m_entityList;
     QString m_entityName;
     virtual QVariant headerImplementation(const unsigned int col) = 0;
-    virtual DbEntity *newDbEntityImplementation() = 0;
+    virtual DbEntity *newDbEntityImplementation() = 0;    
 
-    QVariant headerData(int section, Qt::Orientation orientation, int role);
     QVector<QString> m_headers;
 };
 

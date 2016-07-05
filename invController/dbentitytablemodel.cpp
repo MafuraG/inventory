@@ -47,15 +47,6 @@ bool DbEntityTableModel::setData(const QModelIndex &index, const QVariant &value
     return result;
 }
 
-QVariant DbEntityTableModel::headerData(int section, Qt::Orientation orientation, int role)
-{
-    if (orientation == Qt::Horizontal && role == Qt::DisplayRole){
-        return headerImplementation(section);
-    }
-
-    return QVariant();
-}
-
 void DbEntityTableModel::setHeaders(const QVector<QString> &headers)
 {
     m_headers = headers;
@@ -67,7 +58,11 @@ QVector<QString> DbEntityTableModel::getHeaders() const {
 
 QVariant DbEntityTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    return headerData(section,orientation,role);
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole){
+        return getHeaders()[section];
+    }
+
+    return QVariant();
 }
 
 bool DbEntityTableModel::insertRows(int row, int count, const QModelIndex &parent)
@@ -129,6 +124,11 @@ DbEntity *DbEntityTableModel::getDbEntity(const unsigned int row)
 QList<DbEntity *> DbEntityTableModel::getEntityList() const
 {
     return m_entityList;
+}
+
+void DbEntityTableModel::addDbEntity()
+{
+    insertRow(rowCount());
 }
 
 DbEntity *DbEntityTableModel::newDbEntity()

@@ -30,11 +30,15 @@ public:
     bool setData(const unsigned int col, QVariant value);
 
 
+    bool getDirty() const;
+    void setDirty(bool dirty);
+
 private:
     QString m_name;
     unsigned int m_id;
     QHash<QString,QVariant> m_dbValues;
     QVector<QString> m_headers;
+    bool m_dirty;
 
     virtual QHash<QString,QVariant> dbValuesImplementation() = 0;
     virtual void setDbValuesImplementation(const QHash<QString, QVariant> &dbValues) = 0;

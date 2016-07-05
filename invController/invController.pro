@@ -13,23 +13,25 @@ TARGET = invController
 TEMPLATE = lib
 CONFIG += staticlib
 
-SOURCES += invcontroller.cpp \
+SOURCES += \
     datacontext.cpp \
     sqldatacontext.cpp \
     dataconverter.cpp \
     sqlitedataconverter.cpp \
     dbentitytablemodel.cpp \
     inventorytablemodel.cpp \
-    jounaltablemodel.cpp
+    jounaltablemodel.cpp \
+    inventorycontroller.cpp
 
-HEADERS += invcontroller.h \
+HEADERS += \
     datacontext.h \
     sqldatacontext.h \
     dataconverter.h \
     sqlitedataconverter.h \
     dbentitytablemodel.h \
     inventorytablemodel.h \
-    jounaltablemodel.h
+    jounaltablemodel.h \
+    inventorycontroller.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

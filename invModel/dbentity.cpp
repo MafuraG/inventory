@@ -59,6 +59,16 @@ bool DbEntity::setData(const unsigned int col, QVariant value)
     return setDataImplementation(col,value);
 }
 
+bool DbEntity::getDirty() const
+{
+    return m_dirty;
+}
+
+void DbEntity::setDirty(bool dirty)
+{
+    m_dirty = dirty;
+}
+
 void DbEntity::setDbValues(const QHash<QString, QVariant> &dbValues)
 {    
     setDbValuesImplementation(dbValues);

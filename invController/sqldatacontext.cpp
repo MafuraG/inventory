@@ -35,9 +35,8 @@ void SQLDataContext::CreateEntityImplementation(DbEntity *entity)
     //TODO implement create for Relational databases
     QHash<QString, QVariant> vals = entity->dbValues();
     QString q;
-    buildInsertQuery(q,vals.keys(),entity->getEntityName(),vals.values());
-    setSqlStr(q);
-    qDebug()<<sqlStr();
+    buildInsertQuery(q,vals.keys(),entity->getEntityName(),vals.values());    
+    qDebug()<<q;
     QList<DbEntity*> result;
     executeQuery(q,entity->getEntityName(),result);
 }
@@ -45,6 +44,17 @@ void SQLDataContext::CreateEntityImplementation(DbEntity *entity)
 void SQLDataContext::DeleteEntityImplementation(DbEntity *entity)
 {
     //TODO implement delete for Relational Daatbase
+    QString idfilter = QString("%0 = %1").arg(DbEntity::ID)
+                                         .arg(entity->id());
+
+    QString q = "";
+
+    buildDeleteQuery(q,entity->getEntityName(),idfilter);
+
+    qDebug()<<q;
+
+    QList<DbEntity*> result;
+    executeQuery(q,entity->getEntityName(),result);
 }
 
 void SQLDataContext::UpdateEntityImplementation(DbEntity *entity)
@@ -58,8 +68,7 @@ void SQLDataContext::UpdateEntityImplementation(DbEntity *entity)
 
     QString q;
     buildUpdateQuery(q,updatePairs,entity->getEntityName(),filter);
-    setSqlStr(q);
-    qDebug()<<sqlStr();
+    qDebug()<<q;
 
     QList<DbEntity*> result;
     executeQuery(q,entity->getEntityName(),result);
@@ -70,9 +79,8 @@ void SQLDataContext::SelectEntitiesImplementation(const QString entityname, cons
     //TODO select delete for Relational Daatbase
     QString q ;
     QStringList columns;
-    buildSelectQuery(q,columns,entityname,filter);
-    setSqlStr(q);
-    qDebug()<<sqlStr();    
+    buildSelectQuery(q,columns,entityname,filter);    
+    qDebug()<<q;
 
     executeQuery(q,entityname,selectedEntities);
 }
@@ -229,6 +237,27 @@ void SQLDataContext::buildInsertQuery(QString &q, const QStringList &columns, co
 
     q = str;
 }
+
+void SQLDataContext::buildDeleteQuery(QString &q, const QString &tableName, const QString &idfilter)
+{
+    QStringList q_str;
+    //DELETE FROM table_name
+    //WHERE [condition];
+    q_str.append("DELETE FROM ");
+    q_str.append(tableName);\
+    q_str.append("   WHERE ");
+    q_str.append(idfilter);
+
+    QString str;
+
+    for(QString s: q_str)
+    {
+        str += s;
+    }
+
+    q = str;
+}
+
 
 void SQLDataContext::buildUpdateQuery(QString &q, const QStringList &keyvalPairs, const QString &table, const QStringList &filter)
 {

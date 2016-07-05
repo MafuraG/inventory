@@ -2,7 +2,7 @@
 
 #include <journal.h>
 
-JounalTableModel::JounalTableModel()
+JournalTableModel::JournalTableModel()
 {
     QVector<QString> headers;
     headers.append(Journal::ID);
@@ -14,7 +14,7 @@ JounalTableModel::JounalTableModel()
     setHeaders(headers);
 }
 
-QVariant JounalTableModel::headerImplementation(const unsigned int col)
+QVariant JournalTableModel::headerImplementation(const unsigned int col)
 {
     QVector<QString> headers = getHeaders();
     if (col <headers.count()) return headers[col];
@@ -22,7 +22,7 @@ QVariant JounalTableModel::headerImplementation(const unsigned int col)
     return QVariant();
 }
 
-DbEntity *JounalTableModel::newDbEntityImplementation()
+DbEntity *JournalTableModel::newDbEntityImplementation()
 {
     DbEntity *entity = new Journal();
     return entity;

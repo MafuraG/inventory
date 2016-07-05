@@ -35,6 +35,7 @@ private:
     void buildString(QStringList &result, const QStringList &fragments, const QString &separator);
     void buildFilter(QString &q,  const QString &oper, const QStringList &params);
     void buildInsertQuery(QString &q, const QStringList &columns, const QString &table, const QList<QVariant> &values);
+    void buildDeleteQuery(QString &q, const QString &tableName, const QString &idfilter);
     void buildUpdateQuery(QString &q, const QStringList &keyvalPairs, const QString &table, const QStringList &filter);
     void buildCreateQuery(QString &q, const QString entityName);
     QStringList buildkeyValPairs(const QHash<QString, QVariant> &dbvalues, const QString &separator);

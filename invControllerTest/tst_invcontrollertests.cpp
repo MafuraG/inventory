@@ -18,6 +18,7 @@ private Q_SLOTS:
     void SQLCreateEntityTest();
     void SQLUpdateEntityTest();
     void SQLSelectEntitiesTest();
+    void SQLDeleteEntitiesTest();
     void SQLCreateDBTest();
 
     void sqlDataConverterTest();
@@ -81,6 +82,25 @@ void InvControllerTests::SQLSelectEntitiesTest()
     QVERIFY2(true, "Failure");
 }
 
+void InvControllerTests::SQLDeleteEntitiesTest()
+{
+    Inventory *inv  = new Inventory();
+    DbEntity *entity = inv;
+
+    inv->setId(1);
+    inv->setName("Inventory");
+    inv->setInventoryTypeId(1);
+    inv->setModelId(1);
+    inv->setNumber("123456");
+    inv->setOwnerId(1);
+    inv->setSerial("1234567");
+
+    ctx.DeleteEntity(entity);
+
+    QVERIFY2(true, "Failure");
+    delete inv;
+}
+
 void InvControllerTests::SQLCreateDBTest()
 {
     ctx.CreateDatabase();
@@ -100,7 +120,7 @@ void InvControllerTests::sqlDataConverterTest()
 
 void InvControllerTests::JournalTableModelTest()
 {
-    JounalTableModel model;
+    JournalTableModel model;
     entityTableModelTest(&model);
 }
 

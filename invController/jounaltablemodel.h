@@ -5,10 +5,10 @@
 
 
 
-class JounalTableModel: public DbEntityTableModel
+class JournalTableModel: public DbEntityTableModel
 {
 public:
-    JounalTableModel();
+    JournalTableModel();
 
     // DbEntityTableModel interface
 private:
