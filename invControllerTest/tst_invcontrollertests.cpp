@@ -146,6 +146,11 @@ void InvControllerTests::entityTableModelTest(DbEntityTableModel *model)
 
     DbEntity *entity = model->newDbEntity();
 
+    qDebug()<<"Delete row out of range";
+    model->removeDbEntity(-1);
+
+    QVERIFY2(model->rowCount() == 0, "FAIL");
+
     qDebug()<<"Entity create Passed";
 
     qDebug()<<"model column count "<<model->columnCount();

@@ -11,6 +11,7 @@
 
 class SQLDataContext : public DataContext
 {
+    Q_OBJECT
 public:
     SQLDataContext(const QString &dbtype = "QSQLITE", const QString &dbname="invdb.sqlite");
 

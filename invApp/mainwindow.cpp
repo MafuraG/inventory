@@ -48,3 +48,48 @@ void MainWindow::on_btnAddItem_clicked()
     //Inventory
     invController()->addInventory();
 }
+
+void MainWindow::on_tvInventory_clicked(const QModelIndex &index)
+{
+    //set current Inventory
+    if (index.isValid()) setCurrent_invrow(index.row());
+    else setCurrent_invrow(-1);
+}
+
+int MainWindow::current_invrow() const
+{
+    return m_current_invrow;
+}
+
+void MainWindow::setCurrent_invrow(int current_invrow)
+{
+    m_current_invrow = current_invrow;
+}
+
+int MainWindow::current_jrow() const
+{
+    return m_current_jrow;
+}
+
+void MainWindow::setCurrent_jrow(int current_jrow)
+{
+    m_current_jrow = current_jrow;
+}
+
+
+void MainWindow::on_btnRemoveItem_clicked()
+{
+    //remove Inventory Item
+    if (current_invrow() != -1) invController()->deleteInventory(current_invrow());
+}
+
+void MainWindow::on_btnRemoveEntry_clicked()
+{
+    if (current_jrow() != -1) invController()->deleteJournal(current_jrow());
+}
+
+void MainWindow::on_tvJournal_clicked(const QModelIndex &index)
+{
+    if (index.isValid()) setCurrent_jrow(index.row());
+    else setCurrent_jrow(-1);
+}

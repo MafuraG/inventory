@@ -7,6 +7,7 @@
 
 class InventoryTableModel :public DbEntityTableModel
 {
+    Q_OBJECT
 public:
     InventoryTableModel();
 

@@ -9,8 +9,10 @@
 
 
 
-class InventoryController
+class InventoryController: public QObject
 {
+
+    Q_OBJECT
 
 public:
     InventoryController(const QString dbType, const QString dbPath );
@@ -29,11 +31,14 @@ public:
     void addJournal();
     void deleteJournal(const unsigned int row);
 
+    void loadDataToDB();
+
 private:
     JournalTableModel *m_jModel;
     InventoryTableModel *m_invModel;
 
     SQLDataContext *m_ctx;
+    void loadDataFromDB(DbEntityTableModel *model);
 };
 
 #endif // INVCONTROLLER_H

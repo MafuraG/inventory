@@ -13,6 +13,7 @@ TARGET = invController
 TEMPLATE = lib
 CONFIG += staticlib
 
+
 SOURCES += \
     datacontext.cpp \
     sqldatacontext.cpp \

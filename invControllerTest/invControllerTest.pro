@@ -9,6 +9,7 @@ QT       += sql testlib
 
 QT       -= gui
 
+
 TARGET = tst_invcontrollertests
 CONFIG   += console
 CONFIG   -= app_bundle

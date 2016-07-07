@@ -68,11 +68,13 @@ QVariant DbEntityTableModel::headerData(int section, Qt::Orientation orientation
 bool DbEntityTableModel::insertRows(int row, int count, const QModelIndex &parent)
 {
     bool success = true;
+    if (row < 0 || row > rowCount()) return false;
 
     beginInsertRows(parent, row, row + count - 1);
     for(int i = row; i < row + count; i++){
         DbEntity *entity = newDbEntity();
         m_entityList.insert(i,entity);
+        if (getEmitSignal() == true) emit EntityCreated(entity);
         //qDebug()<<"row inserted row:"<<i;
     }
     endInsertRows();
@@ -80,14 +82,34 @@ bool DbEntityTableModel::insertRows(int row, int count, const QModelIndex &paren
     return success;
 }
 
+bool DbEntityTableModel::inRange(int row){
+    if (row < 0 || row > (rowCount() -1)) return false;
+
+    return true;
+}
+
+bool DbEntityTableModel::getEmitSignal() const
+{
+    return m_emitSignal;
+}
+
+void DbEntityTableModel::setEmitSignal(bool emitSignal)
+{
+    m_emitSignal = emitSignal;
+}
+
 bool DbEntityTableModel::removeRows(int row, int count, const QModelIndex &parent)
 {
     bool success = true;
 
+    if (row < 0 || row > (rowCount() - 1)) return false;
+
     beginRemoveRows(parent, row, row + count - 1);
     for(int i = row; i < row + count; i++){
         //qDebug()<<"Removed row at : "<< i;
-        delete m_entityList[row];
+        //delete m_entityList[row];
+        DbEntity *entity = getDbEntity(row);
+        if (getEmitSignal() == true) emit EntityDeleted(entity);
         m_entityList.removeAt(row);        
     }
     endRemoveRows();
@@ -126,9 +148,18 @@ QList<DbEntity *> DbEntityTableModel::getEntityList() const
     return m_entityList;
 }
 
-void DbEntityTableModel::addDbEntity()
+void DbEntityTableModel::addDbEntity(DbEntity *entity)
 {
-    insertRow(rowCount());
+    if (entity == nullptr){
+        insertRow(rowCount());
+    }else{
+        setEmitSignal(false);
+        insertRow(rowCount());
+        DbEntity* e_new = getDbEntity(rowCount() - 1);
+        e_new->setDbValues(entity->dbValues());
+        setEmitSignal(true);
+    }
+
 }
 
 DbEntity *DbEntityTableModel::newDbEntity()

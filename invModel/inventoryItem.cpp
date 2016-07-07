@@ -32,7 +32,7 @@ QString InventoryItem::getEntityNameImplementation()
 void InventoryItem::setDbValuesImplementation(const QHash<QString, QVariant> &dbValues)
 {
     if (dbValues.count() > 0) {
-        setId(dbValues[ID].toUInt());
+        setId(dbValues[ID].toLongLong());
         setName(dbValues[Name].toString());
         setManId(dbValues[MAN_ID].toUInt());
     }

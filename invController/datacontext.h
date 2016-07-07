@@ -10,8 +10,9 @@
  */
 
 
-class DataContext
+class DataContext:public QObject
 {
+    Q_OBJECT
 public:
     DataContext();
     void CreateEntity(DbEntity *entity);
@@ -23,6 +24,10 @@ public:
     QStringList GetEntitiesList();
 
     virtual ~DataContext(){}
+public slots:
+    void onEntityCreated(DbEntity *entity);
+    void onEntityUpdated (DbEntity *entity);
+    void onEntityDeleted(DbEntity *entity);
 
 private:
     virtual void CreateEntityImplementation(DbEntity *entity) = 0;

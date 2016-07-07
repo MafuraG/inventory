@@ -35,6 +35,7 @@ void SQLDataContext::CreateEntityImplementation(DbEntity *entity)
     //TODO implement create for Relational databases
     QHash<QString, QVariant> vals = entity->dbValues();
     QString q;
+    vals.remove(DbEntity::ID);
     buildInsertQuery(q,vals.keys(),entity->getEntityName(),vals.values());    
     qDebug()<<q;
     QList<DbEntity*> result;
@@ -279,7 +280,6 @@ void SQLDataContext::buildUpdateQuery(QString &q, const QStringList &keyvalPairs
         buildString(q_str,filter,QString(" AND "));
     }
 
-
     QString str;
 
     for(QString s: q_str)
@@ -338,7 +338,7 @@ QStringList SQLDataContext::buildCreateFields(const QString &entityName)
         QString keyVal;
 
         if (key == DbEntity::ID)
-            keyVal = QString("%0 INT PRIMARY KEY NOT NULL").arg(key);
+            keyVal = QString("%0 INTEGER PRIMARY KEY AUTOINCREMENT").arg(key);
         else
             keyVal = QString("%0 %2").arg(key).arg(c->toDbType(val));
 
@@ -356,10 +356,12 @@ void SQLDataContext::executeQuery(const QString &q,const QString &entityName, QL
             QHash<QString, QVariant> dbvalues = item->dbValues();
             QList<QString> keys = dbvalues.keys();            
             for(int i = 0 ; i < dbvalues.count(); i++){
-                QString key = keys[i];                
-                dbvalues[key] = query.value(key);
+                QString key = keys[i];
+                dbvalues[key] = query.value(key);                
             }
-
+            //qDebug()<<"dbValues from db"<< dbvalues;
+            item->setDbValues(dbvalues);
+            //qDebug()<<"dbValues from item"<<item->dbValues();
             result.append(item);
         }
     }

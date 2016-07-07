@@ -1,4 +1,5 @@
 #include "inventory.h"
+#include <QDebug>
 
 Inventory::Inventory()
 {
@@ -85,6 +86,7 @@ void Inventory::setDbValuesImplementation(const QHash<QString, QVariant> &dbValu
         setInventoryTypeId(dbValues[INVENTORYTYPEID].toUInt());
         setModelId(dbValues[MODELID].toUInt());
         setId(dbValues[ID].toUInt());
+        qDebug()<<dbValues[ID]<<"to Uint"<<dbValues[ID].toUInt();
         setName(dbValues[Name].toString());
         setNumber(dbValues[NUMBER].toString());
         setOwnerId(dbValues[OWNERID].toUInt());

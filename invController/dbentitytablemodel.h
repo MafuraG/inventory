@@ -8,6 +8,7 @@
 
 class DbEntityTableModel:public QAbstractTableModel
 {
+    Q_OBJECT
 public:
     DbEntityTableModel();
 
@@ -29,21 +30,31 @@ public:
 
     QList<DbEntity *> getEntityList() const;
 
-    void addDbEntity();
+    void addDbEntity(DbEntity *entity = nullptr);
     DbEntity *newDbEntity();
     void removeDbEntity(const unsigned int row);
 
     QVector<QString> getHeaders() const;
     void setHeaders(const QVector<QString> &headers);
 
+    bool getEmitSignal() const;
+    void setEmitSignal(bool emitSignal);
+
+signals:
+    void EntityDeleted(DbEntity *entity);
+    void EntityCreated(DbEntity *entity);
+    void EntityEdited (DbEntity *entity);
+
 private:
     DbEntity *getItem(const QModelIndex &index) const;
     QList<DbEntity*> m_entityList;
     QString m_entityName;
-    virtual QVariant headerImplementation(const unsigned int col) = 0;
-    virtual DbEntity *newDbEntityImplementation() = 0;    
+    virtual QVariant headerImplementation(const unsigned int col)= 0;
+    virtual DbEntity *newDbEntityImplementation()=0;
 
     QVector<QString> m_headers;
+    bool inRange(int row);
+    bool m_emitSignal = true;
 };
 
 #endif // DBENTITYTABLEMODEL_H

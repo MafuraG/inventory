@@ -1,5 +1,5 @@
 #include "journal.h"
-
+#include <QDebug>
 Journal::Journal()
 {
 
@@ -66,6 +66,7 @@ void Journal::setDbValuesImplementation(const QHash<QString, QVariant> &dbValues
 {
     if (dbValues.count() > 0) {
         setId(dbValues[ID].toUInt());
+        qDebug()<<dbValues[ID]<<"to Uint"<<dbValues[ID].toUInt();
         setName(dbValues[Name].toString());
         setDate(dbValues[DATE].toString());
         setInventoryID(dbValues[INVENTORYID].toUInt());

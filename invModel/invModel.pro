@@ -10,6 +10,7 @@ TARGET = invModel
 TEMPLATE = lib
 CONFIG += staticlib
 
+
 SOURCES += \
     dbentity.cpp \
     organisation.cpp \

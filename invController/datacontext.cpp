@@ -39,3 +39,18 @@ QStringList DataContext::GetEntitiesList()
 {
     return GetEntitiesListImplementation();
 }
+
+void DataContext::onEntityCreated(DbEntity *entity)
+{
+    CreateEntity(entity);
+}
+
+void DataContext::onEntityUpdated(DbEntity *entity)
+{
+    UpdateEntity(entity);
+}
+
+void DataContext::onEntityDeleted(DbEntity *entity)
+{
+    DeleteEntity(entity);
+}

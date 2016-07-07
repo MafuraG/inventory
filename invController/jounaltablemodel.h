@@ -7,6 +7,7 @@
 
 class JournalTableModel: public DbEntityTableModel
 {
+    Q_OBJECT
 public:
     JournalTableModel();
 

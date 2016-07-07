@@ -40,11 +40,11 @@ private:
     QVector<QString> m_headers;
     bool m_dirty;
 
-    virtual QHash<QString,QVariant> dbValuesImplementation() = 0;
-    virtual void setDbValuesImplementation(const QHash<QString, QVariant> &dbValues) = 0;
-    virtual QString getEntityNameImplementation() = 0;
-    virtual QVariant dataImplementation(const unsigned int col) = 0;
-    virtual bool setDataImplementation(const unsigned int col, QVariant value) = 0;    
+    virtual QHash<QString,QVariant> dbValuesImplementation() = 0 ;
+    virtual void setDbValuesImplementation(const QHash<QString, QVariant> &dbValues) = 0 ;
+    virtual QString getEntityNameImplementation() = 0 ;
+    virtual QVariant dataImplementation(const unsigned int col) = 0 ;
+    virtual bool setDataImplementation(const unsigned int col, QVariant value) = 0 ;
 };
 
 #endif // DBENTITY_H
